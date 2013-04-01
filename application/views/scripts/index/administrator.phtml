@@ -1,0 +1,66 @@
+<?php
+$javascript = '';
+$cssScript = '<style>.formRow{padding: 5px 16px;}#main8 .widget{margin-top: 15px;}</style>';
+$pageTitle = 'Administrator';
+$content = $this->controller . '/' . $this->action . '.phtml';
+$breadLinks = '';
+require_once TMP_USER_PATH;
+?>
+<style>
+.title .nInformation{
+	font-weight: bold;
+    margin: 0;
+    padding: 0 25px 10px;    
+    text-shadow: 0 1px 0 #FFFFFF;
+    margin-top:20px;
+    text-align: center;
+}
+</style>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+	    $('#sub_equipement').hide();
+        $('#con_equipement').click(function(){
+            $('#sub_equipement').slideToggle();  
+            $('#sub_equipement').show();  
+        });
+    });
+
+
+</script>
+<div id="contentdata">
+<div class="wrapper">
+<!--
+<div class="title">
+    <div class="nInformation"><p>Users: &nbsp;<i class="red">Create, edit, activate and deactivate users in Interactid. Create and manage teams and roles, including module- and field-level access.</i></p></div>
+</div>
+-->
+        <ul class="middleNavA">
+            <li><a title="<?php echo $this->translate('usermanagement')?>" class="tipS" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/user"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/color/user.png" /><span><?php echo $this->translate('usermanagement')?></span></a></li>
+            <li id="con_equipement"><a title="Equipement" class="tipS" href="#"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/color/equipement.png" /><span><?php echo $this->translate('reference')?>&nbsp;Equipement</span></a></li>  
+            <li><a title="<?php echo $this->translate('maintenance')?>" class="tipS" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/maintenanceadmin/index"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/color/config.png" /><span><?php echo $this->translate('reference')?>&nbsp;<?php echo $this->translate('maintenance')?></span></a></li>
+            
+        </ul>
+        <div class="divider"><span></span></div>
+        <div id="sub_equipement">
+        <ul class="middleNavA">
+         <li><a title="<?php echo $this->translate('factorymanagement')?>" class="tipS" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/factory/index"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/color/factory.png" /><span><?php echo $this->translate('factorymanagement')?></span></a></li>
+            <li><a title="<?php echo $this->translate('categorymanagent')?>" class="tipS" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/factory/typeequipementindex"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/color/category.png" /><span><?php echo $this->translate('categorymanagent')?></span></a></li>
+            <li><a title="<?php echo $this->translate('equipementmanagement')?>" class="tipS" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/factory/equipementindex"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/color/equipement.png" /><span><?php echo $this->translate('equipementmanagement')?></span></a></li>
+           <!-- <li><a title="<?php echo $this->translate('categorymanagent')?>" class="tipS" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/categorymaintenance/index"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/color/category.png" /><span><?php echo $this->translate('categorymanagent')?></span></a></li>-->
+           
+           <!-- <li><a title="<?php echo $this->translate('referencecode')?>" class="tipS" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/referencemaintenance/index"><span style="display: block;height:28px;" class="iconb" data-icon="&#xe07f;"></span><span><?php echo $this->translate('referencecode')?></span></a></li>-->
+      </ul>
+       </div>
+       <!--
+<div class="title">
+            <div class="nInformation"><p>Factories: &nbsp;<i class="red">Create, edit, and activate factories in Interactid.</i></p></div>
+        </div>
+-->
+        <ul class="middleNavA">
+                      
+        </ul>
+        
+        </div>
+
+</div>

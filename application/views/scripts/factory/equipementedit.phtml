@@ -1,0 +1,209 @@
+<?php
+    $javascript ='';
+    $cssScript = '';
+    $pageTitle = $this->translate('edit');
+    $cssScript = '<style>.formRow{padding: 5px 16px;}#main8 .widget{margin-top: 15px;}</style>';
+	$content = $this->controller.'/'.$this->action.'.phtml';    
+    require_once TMP_USER_PATH;
+?>
+<div id="contentdata">
+<?php 
+   if(count($this->selectEquipementForUpdate)!=0){
+   foreach ($this->selectEquipementForUpdate as $rows){
+?>
+<form name="registerForm" onsubmit="return validateForm()" enctype="multipart/form-data" id="usualValidate" class="main" method="post" action="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/equipementedit">
+	<div class="wrapper">
+	
+	<div class="fluid">
+                <div class="widget grid12">       
+                    <div class="whead">
+                         <a class="buttonH bRed right" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/equipementindex"><?php echo $this->translate('back')?></a>
+                         <h6><?php echo $this->translate('edit')?> Equipement</h6>
+						<div class="clear"></div>
+					</div>                     
+					       <input type="hidden" name="equID" value="<?php echo $rows['equip_id'];?>"/>
+                            <!-- form inside -->
+                            <div class="formRow fluid">
+                                <!-- form create -->
+                                <div class="widget">
+                                    <div class="body">
+                                    
+                                      <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php echo $this->translate('companyname')?>:<span class="req">*</span></label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" value="<?php echo $rows['equip_name'];?>" name="txtnamequipement"  id="txtnamequipement" class="required"/>
+            							</div>							
+            							<div class="clear"></div>
+            						</div>
+            						
+            						
+            						 <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companyaddress1')?>Description:<span class="req"></span></label>
+            							</div>
+            							<div class="grid8">
+            								<div id="addresss"><textarea rows="3" cols="50"  name="txtaequipement" id="txtaequipement" placeholder="<?php //echo $this->translate('selectmap')?> descript here">
+            								 <?php echo $rows['equip_description'];?>
+            								</textarea></div>
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+            						
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php echo $this->translate('freqmaintenance')?>:<span class="req"></span></label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" value="<?php echo $rows['equip_freqmaintance'];?>" name="txtFreqmaintenance" id="txtFreqmaintenance" />
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+            						
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companycity')?>Origine:<span class="req"></span></label>
+            							</div>
+            							<div class="grid8">
+            								<div id="states"><input type="text" value="<?php echo $rows['equip_origine'];?>" name="txtOrigine" id="txtOrigine" /></div>
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+                                    
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companytelephone')?>SKU:<span class="req"></span></label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" value="<?php echo $rows['equip_SKU'];?>" name="txtSKU" id="txtSKU" />
+            							</div>
+            							<div class="clear"></div>
+            						</div>                                    
+            						
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php echo $this->translate('warranty')?>:<span class="req"></span></label>
+            							</div>
+                                        <div class="grid8" style="margin-left:1.15%;">
+                                            <div class="formRow">
+                                            <div class="grid2">
+                                            	<?php $warranty = explode(" ", $rows['equip_warranty']);?>
+            								    <input type="text" value="<?php echo $warranty[0];?>" name="txtWarranty" id="txtWarranty" />
+                                            </div>
+                                            <div class="grid10">
+                								<select name="cboPeriod" id="cboPeriod" >  
+                									<?php
+														$select = 'selected';
+														if($warranty[1]==""){
+															$warranty[1]="";
+														}?>              									
+                                                    <option value="1">---- <?php echo $this->translate('selectone')?> ----</option>                									
+                									<!--<option <?php echo ($warranty[1] == 'Hour'?$select:'');?> value="Hour">Hour</option>-->
+                									<option <?php echo ($warranty[1] == 'Day'?$select:'');?> value="Day"><?php echo $this->translate('day')?>(s)</option>
+                									<option <?php echo ($warranty[1] == 'Week'?$select:'');?> value="Week"><?php echo $this->translate('week')?>(s)</option>
+                									<option <?php echo ($warranty[1] == 'Mounth'?$select:'');?> value="Mounth"><?php echo $this->translate('month')?>(s)</option>
+                									<option <?php echo ($warranty[1] == 'Year'?$select:'');?> value="Year"><?php echo $this->translate('year')?>(s)</option>
+                								</select>
+                                              </div>  
+            							</div>
+                                    </div>
+                                        
+            							<div class="clear"></div>
+            						</div>            						
+
+            						
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php echo $this->translate('warrantydate')?>:<span class="req"></span></label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" value="<?php echo $rows['equip_warrantydate'];?>" name="dtpWarrantyDate" id="dtpWarrantyDate" />
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php echo $this->translate('product_create_date')?>:<span class="req"></span></label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" value="<?php echo $rows['equip_datefab'];?>" name="dtpproduct" id="dtpproduct" />
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+            						
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php echo $this->translate('notice') ?>(<?php echo $this->translate('file') ?>: pdf, doc):</label>
+            							</div>
+            							<div class="grid8">
+            								<input type="file" id="filedocxpdf" name="filedocxpdf" class="txtNotice"
+            									size="18.5" style="opacity: 0;"/>
+            							</div>
+            							
+            							<div class="clear"></div>
+            						</div>
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companylogo') ?>Image (<?php echo $this->translate('file') ?>:gif,png,jpg):</label>
+            							</div>
+            							<div class="grid8">
+            								<input type="file" id="fileupload" name="fileupload" class="fileupload"
+            									size="18.5" style="opacity: 0;"/>
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+            						 <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companywebsite')?>Type:<span class="req"></span></label>
+            							</div>
+            							<div class="grid8">
+            								<select name="cbotype" id="cbotype" >
+                                                    <option value="1">---- <?php echo $this->translate('selectone')?> ----</option>  
+                                                    <?php 
+                                                      $selected = "selected";
+                                                      if(count($this->getProductType)!=0):
+                                                      foreach($this->getProductType as $row):
+                                                    ?>              									
+                									<option <?php echo ($row['type_id']==$rows['type_id'])?$selected:"" ?>  value="<?php echo $row['type_id'];?>"><?php echo $row['type_name'];?></option>
+                								    <?php 
+                								      endforeach;
+                								      endif;
+                								    ?>
+                								</select>
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+            						
+                          </div>
+                   </div>
+                
+                               
+                                
+                                <div class="clear"></div>
+                                <div class="formRow fluid"><div class="clear"></div> </div>
+                                 
+                            </div>
+
+
+	
+                    <div class="clear"></div>		 
+                </div>
+                <div class="clear"></div>
+                <div class="formRow">
+                    <div class="body">
+                    <br/>
+                         <a class="buttonS bGreyish" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/equipementindex"><?php echo $this->translate('cancel')?></a>&nbsp;&nbsp;&nbsp;
+                        <input class="buttonM bRed" id="back3" value="<?php echo $this->translate('reset')?>" type="reset" />
+            			<input class="buttonM bBlue ml10" name="btneditequipement" value="<?php echo $this->translate('submit')?>" type="submit"/>
+                        
+                    </div>
+                 </div>				
+            </div>
+        </div>
+        </form>
+        <?php 
+         }
+       } 
+        ?>
+ </div>

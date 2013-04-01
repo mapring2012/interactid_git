@@ -1,0 +1,84 @@
+<?php
+    $javascript ='';
+    $cssScript = '';
+    $pageTitle = 'Type Equipement';
+    $cssScript = '<style>.formRow{padding: 5px 16px;}#main8 .widget{margin-top: 15px;}</style>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+	$breadLinks = '<ul><li><a title="" href="'.$this->baseUrl ().'/'.$this->translate('lang').'/'.$this->controller.'/typeequipementindex"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+    require_once TMP_USER_PATH;
+?>
+
+<div id="contentdata"> 
+<div class="wrapper">
+<div class="fluid">
+            <form id="validate" class="main" method="post" action="<?php echo $this->url(array('controller','factory','action'=>'typeequipementedit'));?>">
+                <?php 
+                  if(count($this->EditTypeEquipement)!=0){
+                   foreach ($this->EditTypeEquipement as $rows){
+                ?>
+               
+                <fieldset>
+                    <div class="widget grid12">
+                        <div class="whead"><h6><?php echo $this->translate('edittypeequipment')?></h6><div class="clear"></div></div>
+                        <input type="hidden" name="editHidden" value="<?php echo $rows['type_id'];?>"/>
+                        <div class="formRow">
+                            <div class="grid3"><label>Name<?php echo $this->translate('typeequipmentname')?>:<span class="req">*</span></label></div>
+                            <div class="grid9"><input type="text"  value="<?php echo $rows['type_name'];?>" class="validate[required]" name="txttypename" id="txttypename"/></div><div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+                        <div class="grid3"><label>Factory:</label><div class="clear"></div>
+                        </div>
+                        <div class="grid9">
+                        <select name="cboFactoryID" id="cboFactoryID" >
+                        <option value="">---- <?php echo $this->translate('selectone')?> ----</option>
+                         <?php 
+                                $selected = "selected";
+								if(count($this->getFactory)!=0){
+								foreach ($this->getFactory as $FactoryName){
+						  ?> 
+                            <option <?php echo ( $FactoryName['Fou_Id']==$rows['fac_id'])?$selected:"";?> value="<?php echo $FactoryName['Fou_Id'];?>"><?php echo $FactoryName['Fou_Name'];?></option>
+                            <?php }}?>
+                        </select>                        
+                        </div>
+                        <div class="clear"></div>
+                        </div>
+                         <div class="formRow">
+                            <div class="grid3"><label>Description<?php //echo $this->translate('company')?>:<span ></span></label></div>
+                            <div class="grid9"> 
+                           <textarea rows="8" cols="" name="txttypedescription" id="txttypedescription" placeholder="Note here">
+                             <?php echo $rows['type_description'];?>
+                           </textarea>
+                            </div><div class="clear"></div>
+                        </div>
+                        
+                        
+                       <!--   <div id="uploader">You browser doesn't have HTML 4 support.</div>-->
+                      
+                        <div class="formRow">
+                        <input type="submit" value="<?php echo $this->translate('update')?>"  name="btnupdatetype" class="buttonM bBlue formSubmit" />
+                        <a style="float:right; margin-right:10px;height:16px;" class="buttonS bGreyish" href="<?php echo  $this->url(array('Controller'=>'factory','action'=>'typeequipementindex'));?>"><?php echo $this->translate('cancel')?></a>
+                        &nbsp;&nbsp;&nbsp;
+                        <div class="clear"></div></div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                      <!-- <div class="widget grid6">
+                    	<div class="body" align="center">
+                            <div style="max-height: 565px;overflow:hidden; margin-bottom:10px;">
+                            <img src="<?php echo $this->baseUrl ()?>/images/sitetest/00/01(1).gif" alt="" style="width: 100%; margin-bottom:30px" />
+                            </div>
+                            <a href="<?php echo $this->baseUrl ()?>/images/sitetest/00/01(5).jpg" class="lightbox" rel="group"><img src="<?php echo $this->baseUrl ()?>/images/sitetest/01(5).jpg" alt="" /></a>
+                            <a href="<?php echo $this->baseUrl ()?>/images/sitetest/00/01(2).jpg" class="lightbox" rel="group" style="margin: 0 10px;"><img src="<?php echo $this->baseUrl ()?>/images/sitetest/01(2).jpg" alt="" /></a>
+                            <a href="<?php echo $this->baseUrl ()?>/images/sitetest/00/01(3).jpg" class="lightbox" rel="group" style="margin-right: 10px;"><img src="<?php echo $this->baseUrl ()?>/images/sitetest/01(3).jpg" alt="" /></a>
+                            <a href="<?php echo $this->baseUrl ()?>/images/sitetest/00/01(4).jpg" class="lightbox" rel="group"><img src="<?php echo $this->baseUrl ()?>/images/sitetest/01(4).jpg" alt="" /></a>
+                        </div>
+                        
+                    </div>-->
+                </fieldset>
+                <?php }}?>
+            </form>
+        </div>
+		
+	</div>
+</div>

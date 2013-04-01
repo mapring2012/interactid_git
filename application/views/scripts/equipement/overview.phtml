@@ -1,0 +1,436 @@
+<?php
+$javascript ='';
+$cssScript = '<style>
+.widget .body{background:#fff;padding:0;}
+.widget{border:1px solid #ddd;}
+.tab1 td:first-child { background:#eee}
+.tab1 td:first-child + td { font-weight:bold;background:#fff;}
+.tab1 td:first-child + td { font-weight:bold;background:#fff;}
+.tab1 td:first-child + td + td { font-weight:bold;background:#eee;}
+.tab1 td:first-child + td + td + td{ font-weight:bold;background:#fff;}
+#map_canvas {height: 250px;width: 100%;}
+FIELDSET {
+border: 1px solid #ccc;
+padding: 1em;
+margin: 0;font-size: 16px;}
+FIELDSET legend {font-weight:bold;}
+.left{text-align:left}
+.bold{font-weight: bold}
+.underline{text-decoration: underline;}
+.tableTitle{background-color: #62819C!important; color:#FFFFFF;}
+.tableRow{background-color: #FFFFFF!important;}
+.subtitle{background-color: #EEEEEE!important;}
+.center{text-align:center;}
+</style>';
+$pageTitle = $this->translate('overview');
+$breadLinks = '<ul><li><a title="" href="'.$this->baseUrl ().'/'.$this->translate('lang').'/'.$this->controller.'/add"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+$content = $this->controller.'/'.$this->action.'.phtml';
+require_once TMP_USER_PATH;
+?>
+<div id="contentdata">  
+	<?php  foreach($this->getToViews as $ValueOV):?>
+	<div class="wrapper">
+    
+		<div class="fluid">
+			<div class="widget grid12">                    
+				<a class="buttonH bRed right" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/index"><?php echo $this->translate('back')?></a>
+				<a title="" class="buttonH bBlue right" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/edit?actions=edit&id=<?php echo $ValueOV['equip_Id'];?>"><?php echo $this->translate('edit')?></a>
+				<ul class="tabs">
+					<li><a href="#tabb1"><?php echo $this->translate('overview')?></a></li>
+					<li><a href="#tabb2"><?php echo $this->translate('workcard')?></a></li>
+					<li><a href="#tabb3"><?php echo $this->translate('sheetcontrol')?></a></li>
+				</ul>
+                    
+				<div class="tab_container">
+					<div id="tabb1" class="tab_content">                    
+						<div class="justTable grid4">
+							<div class="body">
+								<table width="100%" cellspacing="0" cellpadding="0" class="tDefault widget tab1">
+									<tbody>
+										<tr>
+											<td width="200">N&#186; Equipement<?php //echo $this->translate('companyaddress2')?></td>
+											<td width="600">000<?php echo $ValueOV['equip_Id'];?></td>
+										</tr>
+										<tr>
+											<td width="200"><?php echo $this->translate('companyname')?></td>
+											<td width="600"><?php echo $ValueOV['equip_Name'];?></td>
+										</tr>
+										<tr>
+											<td width="200"><?php echo $this->translate('datecommision')?></td>
+											<td width="600">12 / 2 / 12013<?php //echo $ValueOV['equip_Name'];?></td>
+										</tr>
+										<tr>
+											<td width="200"><?php echo $this->translate('provider')?></td>
+											<td width="600"><?php echo $ValueOV['Fou_Name'];?></td>
+										</tr>
+									</tbody>
+								</table>        
+                        
+                        
+								<table width="100%" cellspacing="0" cellpadding="0" class="tDefault widget tab1">
+									<tbody>
+										<tr>
+											<td width="200"><?php echo $this->translate('datemenufacture')?></td>
+											<td width="600">12 / 2 / 12013<?php echo $ValueOV['equip_Id'];?></td>
+                                    
+                                    
+										</tr>
+										<tr>
+											<td width="200">N&#186; <?php echo $this->translate('identifiant')?></td>
+											<td width="600">1000520<?php //echo $ValueOV['equip_Name'];?></td>
+										</tr>
+										<tr>
+											<td width="200">TypeEquipement <?php echo $this->translate('companyname')?></td>
+											<td width="600"><?php echo $ValueOV['type_name'];?></td>
+										</tr>    
+										<tr>
+											<td width="200">Frequent Maintenance</td>
+											<td width="600"><?php echo $ValueOV['equip_Freqmaintnance'];?></td>
+										</tr>   
+										<tr>
+											<td width="200">Frequent Maintenance Date</td>
+											<td width="600"><?php echo $ValueOV['equip_Freqmaintnancedate'];?></td>
+										</tr>                           
+									</tbody>
+								</table>
+                        
+								<table width="100%" cellspacing="0" cellpadding="0" class="tDefault widget tab1">
+									<tbody>
+										<tr>
+											<td width="200">Notice(Download)</td>
+											<?php if($ValueOV['equip_Notice']!=""){?>
+												<td width="600"><a href="<?php echo $this->baseUrl();?>/data/documents/<?php echo $ValueOV['equip_Notice'];?>">Download</a></td>
+												<?php }else{?>
+												<td width="600">No Ducument Download</td>
+												<?php 
+											}?>
+										</tr>          
+									</tbody>
+								</table>
+                        
+							</div>
+						</div> 
+                    
+						<!-- Map -->
+						<div class="justTable grid4">
+							<div class="body" align="center">
+								<table width="100%" cellspacing="0" cellpadding="0" class="tDefault widget tab1">
+									<tbody>
+										<tr>
+											<td width="200">GPS Longtude <?php //echo $this->translate('companyaddress2')?></td>
+											<td width="600"><?php echo $ValueOV['equip_GPSLong'];?></td>
+                                        
+                                        
+										</tr>
+										<tr>
+											<td width="200">GPS Latitude<?php //echo $this->translate('companyaddress2')?></td>
+											<td width="600"><?php echo $ValueOV['equip_GPSLatit'];?></td>
+										</tr>
+										<tr>
+											<td width="200">GPS Altitude<?php //echo $this->translate('companyaddress2')?></td>
+											<td width="600"><?php //echo $ValueOV['type_name'];?></td>
+										</tr>                                
+									</tbody>
+								</table>
+								<?php 
+								if(!empty($ValueOV['equip_GPSLong'])){
+									?> 
+									<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+									<div id="map_canvas" class="widget"></div>
+									<script type="text/javascript">
+										function initialize() {
+											var pos = new google.maps.LatLng(<?php echo $ValueOV['equip_GPSLong'];?>, <?php echo $ValueOV['equip_GPSLatit'];?>);
+											var centre = pos;
+											var types = [google.maps.MapTypeId.ROADMAP,google.maps.MapTypeId.SATELLITE,google.maps.MapTypeId.HYBRID];
+											var myOptions = { zoom: 14, center: centre, mapTypeId:google.maps.MapTypeId.ROADMAP, mapTypeControlOptions:{mapTypeIds: types}};
+											var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                            		
+											var marker = new google.maps.Marker({position: pos, map: map, title:"IDEM"});
+											//var contentString = "<div id='map_infos'>?</div>";
+											//var infowindow = new google.maps.InfoWindow({content: contentString});
+											google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker); });
+											infowindow.open(map,marker);
+										}
+                            
+									</script> 
+									<?php
+								}
+								?>    
+							</div>
+						</div>    
+						<!-- end Map -->
+						<div class="widget justTable grid4">
+							<div class="body" align="center">
+								<img src="<?php echo $this->baseUrl ()?>/images/sitetest/00/01(1).gif" alt="" style="width: 100%; margin-bottom:30px" />
+								<a href="<?php echo $this->baseUrl ()?>/images/sitetest/00/01(5).jpg" class="lightbox" rel="group"><img src="<?php echo $this->baseUrl ()?>/images/sitetest/01(5).jpg" alt="" /></a>
+								<a href="<?php echo $this->baseUrl ()?>/images/sitetest/00/01(2).jpg" class="lightbox" rel="group" style="margin: 0 10px;"><img src="<?php echo $this->baseUrl ()?>/images/sitetest/01(2).jpg" alt="" /></a>
+								<a href="<?php echo $this->baseUrl ()?>/images/sitetest/00/01(3).jpg" class="lightbox" rel="group" style="margin-right: 10px;"><img src="<?php echo $this->baseUrl ()?>/images/sitetest/01(3).jpg" alt="" /></a>
+								<a href="<?php echo $this->baseUrl ()?>/images/sitetest/00/01(4).jpg" class="lightbox" rel="group"><img src="<?php echo $this->baseUrl ()?>/images/sitetest/01(4).jpg" alt="" /></a>
+							</div>
+						</div>
+						<!-- Photo Gallary -->
+						<!-- end Photo Gallary -->
+					</div>
+                
+                
+					<?php endforeach;?>
+					<div id="tabb2" class="tab_content">
+						<div class="fluid">
+							<?php foreach($this->getToViews as $ValueOV):?>
+							<div class="grid6">
+								<div class="widget">
+               
+									<div class="body">
+										<div class="table1">
+											<table width="100%" cellspacing="0" cellpadding="0" class="tDefault space">
+												<?php  $selected='selected'; ?>
+												<tbody>
+													<tr>
+														<td width="200"> Equipement</td>
+														<td width="600"><?php echo $ValueOV['equip_Name']; ?></td>
+                                    
+													</tr>
+													<tr>
+														<td width="200"> N&#186; Equipement</td>
+														<td width="600"><?php //echo $ValueOV['equip_name']; ?></td>
+                                    
+													</tr>
+													<tr>
+														<td width="200"><?php echo $this->translate('reference')?></td>
+														<td width="600"><?php echo $ValueOV['equip_Reference'];?></td>
+													</tr>
+													<tr>
+														<td width="200">Fabrication</td>
+														<td width="600"><?php echo $ValueOV['equip_Datefab'];?></td>
+													</tr>
+													<tr>
+														<td width="200"><?php echo $this->translate('misseenplace')?></td>
+														<td width="600"><?php //echo $ValueOV['equip_Freqmaintnance'];?></td>
+													</tr> 
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>   
+               
+								<div class="widget">
+									<div class="body">
+										<div class="table1">
+											<table width="100%" cellspacing="0" cellpadding="0" class="tDefault space">
+												<?php  $selected='selected'; ?>
+												<tbody>
+													<tr>
+														<td width="200"><?php echo $this->translate('location')?></td>
+														<td width="600"><?php echo $ValueOV['Com_Address1'];?></td>
+                                    
+													</tr>
+													<tr>
+														<td width="200">Organisme</td>
+														<td width="600"><?php  echo $ValueOV['Com_Name'];?></td>
+                                    
+													</tr>
+													<tr>
+														<td width="200"><?php //echo $this->translate('xxxx')?> Contact</td>
+														<td width="600"><?php //echo $ValueOV['equip_Description'];?></td>
+													</tr>
+													<tr>
+														<td width="200"><?php echo $this->translate('address')?></td>
+														<td width="600"><?php //echo $ValueOV['equip_SKU'];?></td>
+													</tr>
+													<tr>
+														<td width="200"><?php //echo $this->translate('xxxx')?> CP</td>
+														<td width="600"><?php //echo $ValueOV['equip_Freqmaintnance'];?></td>
+													</tr>
+													<tr>
+														<td width="200"><?php echo $this->translate('city')?></td>
+														<td width="600"><?php //echo $ValueOV['equip_Freqmaintnance'];?></td>
+													</tr> 
+												</tbody>
+											</table>
+										</div>
+									</div> 
+								</div>
+								<!-- end  <div class="widget"> --> 	
+								<div class="clear"></div>		 
+							</div>
+							<!-- end <div class="widget grid6">  -->
+            
+            
+							<div class="grid6"> 
+								<fieldset>
+									<legend><?php echo $this->translate('executer')?></legend>
+									<?php echo $this->translate('date_edit')?>:<?php echo $ValueOV['equip_Createdate'];?><br />
+									<?php echo $this->translate('modifydate')?>: <?php echo $ValueOV['equip_Modifdate'];?>
+								</fieldset> 
+                
+								<div class="widget">
+									<div class="body">
+										<style type="text/css">
+											.tDefault tbody tr:first-child{
+												box-shadow: none;}
+											table.space td {
+												/*border:15px solid #dcc8c9;*/
+												background: #fff;
+											}
+											table.space tr {
+												background: #dcc8c9;                        
+											}
+											.table1 {
+												padding: 10px;
+												background: #dcc8c9}
+											table.space td:first-child{
+												background: #f6e2e3}
+										</style>
+										<div class="table1">
+											<table width="100%" cellspacing="0" cellpadding="0" class="tDefault space">
+												<?php  $selected='selected'; ?>
+												<tbody>
+													<tr>
+														<td width="200">Fournisseur</td>
+														<td width="600"><?php echo $ValueOV['Fou_Name'];?></td>
+                                    
+													</tr>
+													<tr>
+														<td width="200"><?php echo $this->translate('address')?></td>
+														<td width="600"><?php echo $ValueOV['Fou_Adresse1'];?></td>
+                                    
+													</tr>
+													<tr>
+														<td width="200">Tel</td>
+														<td width="600"><?php echo $ValueOV['Fou_Telephone'];?></td>
+													</tr>
+													<tr>
+														<td width="200">Fax</td>
+														<td width="600"><?php echo $ValueOV['Fou_Fax'];?></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div> 
+								</div>
+							</div>                
+						</div>
+					</div>
+					<?php endforeach;?>                   
+					<div id="tabb3" class="tab_content">        
+					<div class="tab3">	
+                        <div class="fluid">
+						<div class="widget justTable">
+							<table cellpadding="0" cellspacing="0" width="100%" class="tDefault">
+								<tbody>
+                    
+									<tr class="tableTitle center">
+										<td class="bold" width="25%">N&#186; <?php echo $this->translate('noTypeEquipement')?></td>
+										<!--<td class="bold" width="25%"><?php //echo $this->translate('siteName')?></td>-->
+										<td class="bold" width="25%"><?php echo $this->translate('nomTypeEquipement')?></td>
+										<td class="bold" width="25%"><?php echo $this->translate('description')?></td>
+									</tr>
+                                    <?php foreach($this->getToViews as $getRows){?>
+									<tr class="tableRow center">
+										<td><?php echo $getRows['type_ref']; ?></td>
+										<!--<td>Row 2</td>-->
+										<td><?php echo $getRows['type_name']; ?></td>
+										<td><?php echo $getRows['type_description']; ?></td>
+									</tr>
+                                    <?php } ?>
+								</tbody>
+							</table>
+						</div>
+                        </div>
+                        
+                        <div class="fluid">
+						<div class="widget grid6">
+								
+							<table width="100%" cellspacing="0" cellpadding="0" class="tDefault">
+								<tbody>
+                               
+									<tr class="tableTitle bold center" >
+										<td colspan="2">
+											Control visuel
+										</td>
+									</tr>
+                                    
+									<tr class="tableRow bold underline center subtitle">
+										<td width="80">N&#186; Control</td>
+										<td><?php echo $this->translate('description')?></td>
+									</tr>
+                                    <?php $i = 1;?>
+                                     <?php 
+                                     if(count($this->level1)!=0){
+                                         
+                                     
+                                     foreach($this->level1 as $getMaintenanceViews){
+                                         
+                                         ?>
+									<tr class="tableRow center">
+										<td><span class="label label-info" style="margin-left: 10px;">000<?php echo $i;?></span></td>
+										<td class="left"><?php echo $getMaintenanceViews['refmain_label']; ?></td>
+									</tr>
+                                    <?php $i++; ?>
+                                   <?php 
+                                     }
+                                   }else{
+                                       ?>
+                                       <tr>
+										<td colspan="2" class="center">No record found</td>
+									  </tr>
+                                       <?php 
+                                   }
+                                    ?>
+								</tbody>
+							</table>
+							</div>
+                        <div class="widget grid6">
+								
+							<table width="100%" cellspacing="0" cellpadding="0" class="tDefault">
+								<tbody>
+                               
+									<tr class="tableTitle bold center" >
+										<td colspan="2">
+											Control Maintenance
+										</td>
+									</tr>
+                                    
+									<tr class="tableRow bold underline center subtitle">
+										<td width="80">N&#186; Control</td>
+										<td><?php echo $this->translate('description')?></td>
+									</tr>
+                                    <?php $i = 1;?>
+                                     <?php 
+                                     if(count($this->level2)!=0){
+                                         
+                                     
+                                     foreach($this->level2 as $getMaintenanceViews){
+                                         
+                                         ?>
+									<tr class="tableRow center">
+										<td><span class="label label-info" style="margin-left: 10px;">000<?php echo $i;?></span></td>
+										<td class="left"><?php echo $getMaintenanceViews['refmain_label']; ?></td>
+									</tr>
+                                    <?php $i++; ?>
+                                   <?php 
+                                     }
+                                   }else{
+                                       ?>
+                                       <tr>
+										<td colspan="2" class="center">No record found</td>
+									  </tr>
+                                       <?php 
+                                   }
+                                    ?>
+								</tbody>
+							</table>  
+						</div>	
+                        </div>
+                        
+                        
+					</div>
+                    </div>
+				</div>	
+				<div class="clear"></div>		 
+			</div>
+		</div>
+	</div> 
+
+</div>
+   

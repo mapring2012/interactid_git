@@ -1,0 +1,212 @@
+<?php
+    $javascript ='';
+    $cssScript = '<style>.widget .body{background:#fff;padding:0;}.widget{border:1px solid #ddd;}
+    td:first-child { background:#eee}td:first-child + td { font-weight:bold;background:#fff;}background:#eee}td:first-child + td { font-weight:bold;background:#fff;}td:first-child + td + td { font-weight:bold;background:#eee;}td:first-child + td + td + td{ font-weight:bold;background:#fff;}#map_canvas {height: 250px;width: 100%;}</style>';
+    $pageTitle = $this->translate('overview');
+    $breadLinks = '<ul><li><a title="" href="'.$this->baseUrl ().'/'.$this->translate('lang').'/'.$this->controller.'/add"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+    require_once TMP_USER_PATH;
+?>
+
+
+<div id="contentdata"> 
+    <div class="wrapper">
+        <div class="fluid">
+            <div class="widget grid12">       
+                <ul class="tabs">
+                <a class="buttonH bRed right" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/index"><?php echo $this->translate('back')?></a>
+				<a title="" class="buttonH bBlue right" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/edit?actions=edit&&id=<?php echo $this->getIdView;?>"><?php echo $this->translate('edit')?></a>
+                    <li class="activeTab"><a href="#tabb1"><?php echo $this->translate('overview')?></a></li>
+                    <li><a href="#tabb2"><?php echo $this->translate('companytab2')?></a></li>
+                    <!--  <li><a href="#tabb3">Other</a></li>-->
+                </ul>
+                
+                <div class="tab_container">
+                    <div class="tab_content" id="tabb1" style="display: block;">
+                    <div class="widget justTable">
+                        <div id="map_canvas"></div>
+                        <table width="100%" cellspacing="0" cellpadding="0" class="tDefault">
+                        <?php  foreach ($this->SelectOnFormEdit as $Values):?>
+                         <?php  $selected='selected'; ?>
+                          <input type="hidden" name="hiddenID" value="<?php echo $Values['Com_Id'];?>" />
+                            <tbody>
+                                <tr>
+                                    <td width="200"><?php echo $this->translate('companyname')?></td>
+                                    <td width="600"><?php echo $Values['Com_Name'];?></td>
+                                    <td width="200"><?php echo $this->translate('RaisonSocial')?></td>
+                                    <td width="600"><?php echo $Values['Com_RaisonSocial'];?></td>
+                                    
+                                </tr>
+                                <tr>
+                                   <td width="200"><?php echo $this->translate('companyaddress1')?></td>
+                                    <td width="600"><?php echo $Values['Com_Address1'];?></td>
+                                    <td><?php echo $this->translate('companytelephone')?></td>
+                                    <td><?php echo $Values['Com_Telephone'];?></td>
+                                </tr>
+                                <tr>
+                                   <td width="200"><?php echo $this->translate('companycodepostal')?></td>
+                                    <td width="600"><?php echo $Values['Com_ZipCode'];?></td>
+                                    <td>Fax</td>
+                                    <td><?php echo $Values['Com_Fax'];?></td>
+                                    
+                                </tr>
+                                <tr>
+                                <td width="200"><?php echo $this->translate('companycity')?></td>
+                                    <td width="600"><?php echo $Values['Com_City'];?></td>
+                                  
+                                   <td width="200"><?php echo $this->translate('companyemail')?></td>
+                                   <td width="600"><a href="mailto:<?php echo $Values['Com_Mail'];?>"><?php echo $Values['Com_Mail'];?></a></td> 
+                                </tr>
+                                <tr>
+                                    <td width="200"><?php echo $this->translate('companycountry')?></td>
+                                    <td width="600"><?php echo $Values['Com_Country'];?></td> 
+                                     <td width="200"><?php echo $this->translate('companywebsite')?></td>
+                                   <td width="600"><a href="http://<?php echo $Values['Com_Website'];?>"><?php echo $Values['Com_Website'];?></a></td>
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>
+                        <?php endforeach;?>                        
+                    </div> 
+                </div>
+             <!-- end  formRow --> 
+                    <div class="tab_content" id="tabb2" style="display: none;"> 
+                        <div class="widget justTable">
+                        
+                        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+                                   <?php
+                                   /* for Convert accented characters to their plain ascii equivalents By Socheat Ngann */
+                                    $normalizeChars = array(
+                                        'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+                                        'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+                                        'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+                                        'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+                                        'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+                                        'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+                                        'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f'
+                                    );                                   
+                                        if($Values['Com_Address1']!='')
+                                        {
+                                            //$address    = str_replace(' ', '%20', $Values['Com_City'].', '.$Values['Com_Address1']);
+                                            $address    = str_replace(" ","+",$Values['Com_Address1']) . ",+" . str_replace(" ","+",$Values['Com_Address2']) . ",+" . str_replace(" ","+",$Values['Com_Country']) . ",+" . str_replace(" ","+",$Values['Com_ZipCode']);
+                                            $address        = strtr($address, $normalizeChars);
+                                              /*Query Google Geocoding API */
+                                            $ch = curl_init();
+                                            curl_setopt($ch, CURLOPT_URL, "http://maps.googleapis.com/maps/api/geocode/xml?address=".$address."&sensor=false");
+                                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                                            $xml = curl_exec($ch);                                                                                        
+                                            
+                                            //Use SimpleXML library to get the data from the XML string
+                                            $xml = new SimpleXMLElement($xml);
+                                            $lat = $xml->result[0]->geometry[0]->location[0]->lat;
+                                            $lng = $xml->result[0]->geometry[0]->location[0]->lng;
+                                            $coords = $lat . "," . $lng;
+                                            curl_close($ch); //Close the CURL instance, to keep things tidy                                           
+                                            if(!empty($lat))
+                                            {                                                
+                                   ?>                                    
+                                   <script type="text/javascript">
+                                    	function initialize() {
+                                   		    var latlng = new google.maps.LatLng(<?php echo $lat;?>, <?php echo $lng;?>);
+                                            var myOptions = {
+                                              zoom: 14,
+                                              center: latlng,
+                                              mapTypeId: google.maps.MapTypeId.ROADMAP
+                                            };
+                                            var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+                                         
+                                            var marker = new google.maps.Marker({
+                                              position: latlng, 
+                                              map: map, 
+                                              title:""
+                                            });
+                                    	}
+                                    
+                                    </script>                                    
+                                    <?php
+                                            }
+                                        }
+                                    ?>  
+                        <table width="100%" cellspacing="0" cellpadding="0" class="tDefault">
+                        <?php  foreach ($this->SelectOnFormEdit as $Values): ?>
+                                				    <?php  $selected='selected'; ?>
+                            <input type="hidden" name="hiddenID" value="<?php echo $Values['Com_Id'];?>" />
+                            <tbody>
+                                <tr>
+                                   <td width="200"><?php echo $this->translate('companylogo')?></td>
+                                   <td width="600"><img style="width: 80px; height:80px;"  src="<?php echo $this->baseUrl();?>/data/uploads/thumb/<?php echo $Values['Com_Logo']; ?>"/></td>
+                                   <td width="200">Type:</td>
+                                   <td width="600"><?php echo $Values['Com_Type']; ?></td> 
+                                </tr>
+                                <tr>
+                                    
+                                    <td width="200"><?php echo $this->translate('companysiret')?></td>
+                                    <td width="600"><?php echo $Values['Com_Siret'];?></td>
+                                    <td width="200"><?php echo $this->translate('companyTVA')?></td>
+                                   <td width="600"><?php echo $Values['Com_VAT'];?></td>
+                                </tr>
+                                <tr>
+                                   
+                                   <td width="200"><?php echo $this->translate('selectstatus')?></td>
+                                   <td width="600">
+                                   <?php
+                                    if($Values['Com_Status']=='Actif')
+                                    {
+                                        $ClassStatut = 'label-success';
+                                    }
+                                    else if($Values['Com_Status']=='Suspendu')
+                                    {
+                                        $ClassStatut = 'label-warning';
+                                    }
+                                    else if($Values['Com_Status']=='Inactif')
+                                    {
+                                        $ClassStatut = 'label-important';
+                                    }
+                                    else
+                                    {
+                                       $ClassStatut = ''; 
+                                    }
+                                    ?><span class="label <?php echo $ClassStatut;?>"><?php echo $Values['Com_Status'];?></span></td>
+                                   <td width="200"><?php echo $this->translate('assignedto')?></td>
+                                    <td width="600"><?php echo $Values['User_login'];?></td> 
+                                </tr>
+                               
+                                <tr>
+                                    <td width="200"><?php echo $this->translate('createdate')?></td>
+                                    <td width="600"><?php echo $Values['Com_createdate'];?></td>
+                                    <td width="200"><?php echo $this->translate('modifydate')?></td>
+                                   <td width="600"><?php echo $Values['Com_modifdate'];?></td>
+                                </tr>                                
+                            </tbody>
+                        </table>
+                        <?php endforeach;?>
+                        </div>
+                    
+                    </div>
+                    <div class="tab_content" id="tabb3" style="display: none;">
+                    <div class="widget grid6 justTable">
+                        <div class="body">
+                        <table width="100%" cellspacing="0" cellpadding="0" class="tDefault">
+                        <?php  foreach ($this->SelectOnFormEdit as $Values): ?>
+                        <?php  $selected='selected'; ?>
+                            <input type="hidden" name="hiddenID" value="<?php echo $Values['Com_Id'];?>" />
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                        <?php endforeach;?>
+                        </div>
+                        </div>
+                        <!--    <div class="widget grid6 justTable">
+                            <div class="body">                                
+                            </div>
+                        </div> -->
+                    </div>
+                </div>	
+                <div class="clear"></div>		 
+            </div>                
+        </div>
+    </div>
+</div>
+   

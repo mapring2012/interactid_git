@@ -1,0 +1,448 @@
+<?php
+    $javascript ='';
+    $cssScript = '';
+    $pageTitle = $this->translate('edit');
+    $cssScript = '<style>.formRow{padding: 5px 16px;}#main8 .widget{margin-top: 15px;}</style>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+    require_once TMP_USER_PATH;
+?>
+<script>
+    function add(){
+        $.get("<?php echo $this->url(array('controller','equipement ','action'=>'search'));?>",{name:$('#txtSearch').val()},function(data){
+            $('#test').html(data);
+            
+        });
+    
+        $("#btnSearch").click(function(){
+           $('#test').load("<?php echo $this->url(array('controller','equipement ','action'=>'search'));?>"); 
+            
+        });
+        
+    }
+</script>
+<div><?php echo $this->searchname;?></div>
+<div id="contentdata"> 
+<?php foreach ($this->selectEdit as $rows){?>
+<div class="wrapper">
+<div class="fluid">
+            <form id="validate" class="main" method="post" action="<?php echo $this->url(array('action'=>'edit'));?>">
+                <fieldset>
+                    <div class="widget grid12">
+                        <div class="whead">
+                        <a class="buttonH bRed right" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/index"><?php echo $this->translate('back')?></a>
+                        <h6><?php echo $this->translate('addtypeequipmentname')?></h6><div class="clear"></div></div>
+                        
+                        <div class="formRow">
+                            <!-- form create -->
+                                <div class="widget grid6">
+                                    <div class="body">
+                                        <form>
+                                          <input type="hidden" value="<?php echo $rows['equip_Id']?>" name="txtid"  id="txtid" />
+                                        <div class="formRow fluid">
+                                      
+                							<div class="grid4">
+                								<label>Organisme<span class="req">*</span></label>
+                							</div>
+                							<div class="grid8">
+                								<select name="cboOrganisme" id="cboOrganisme" class="required" >
+                									<option value="">---- <?php echo $this->translate('selectone')?> ----</option>
+                									<?php 
+            								  if(count($this->getOrganism)!=0){
+            								 foreach ($this->getOrganism as $getOrganism){
+                                               $selected ="selected";
+            								 ?>
+            								 <option <?php echo ($getOrganism["Com_Id"]==$rows['Org_Id'])?$selected:""?> value="<?php echo $getOrganism["Com_Id"]; ?>"><?php echo $getOrganism["Com_Name"]; ?></option>	
+            								<?php 
+            									}
+            								 }
+            								?>
+                								</select>
+                							</div>
+                							<div class="clear"></div>
+              						    </div>
+                                        
+                                        
+                                        <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companycountry')?>Site:<span class="req">*</span></label>
+            							</div>
+            							<div class="grid8">
+            								<select name="cboSite" id="cboSite" class="required" >
+            									<option value="">---- <?php echo $this->translate('selectone')?> ----</option>
+            										<?php 
+            								  if(count($this->getSite)!=0){
+            								 foreach ($this->getSite as $getSite){
+            								?>
+            								 <option <?php echo ($getSite["site_Id"]==$rows['site_Id'])?$selected:""?> value="<?php echo $getSite["site_Id"]; ?>"><?php echo $getSite["site_Name"]; ?></option>	
+            								<?php 
+            									}
+            								 }
+            								?>
+            								</select>
+            							</div>
+            							<div class="clear"></div>
+            						  </div>
+                                      
+                                      
+                                      <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companycountry')?>Fournisseur:<span class="req">*</span></label>
+            							</div>
+            							<div class="grid8">
+            								<select name="cboFournisseur" id="cboFournisseur" class="required" >
+            									<option value="">---- <?php echo $this->translate('selectone')?> ----</option>
+            										<?php 
+            								  if(count($this->getFactory)!=0){
+            								 foreach ($this->getFactory as $getFactory){
+            								?>
+            								 <option <?php echo ($getFactory["Fou_Id"]==$rows['Fou_Id'])?$selected:""?> value="<?php echo $getFactory["Fou_Id"]; ?>"><?php echo $getFactory["Fou_Name"]; ?></option>	
+            								<?php 
+            									}
+            								 }
+            								?>
+            								</select>
+            							</div>
+            							<div class="clear"></div>
+            						  </div>
+                                      
+                                      <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companycountry')?>Type equipement:<span class="req">*</span></label>
+            							</div>
+            							<div class="grid8">
+            								<select name="cboTypeEquipement" id="cboTypeEquipement" class="required" >
+            									<option value="">---- <?php echo $this->translate('selectone')?> ----</option>
+            										<?php 
+            								  if(count($this->getTypeEquipement)!=0){
+            								 foreach ($this->getTypeEquipement as $getTypeEquipement){
+            								?>
+            								 <option <?php echo ($getTypeEquipement["type_id"]==$rows['type_id'])?$selected:""?> value="<?php echo $getTypeEquipement["type_id"]; ?>"><?php echo $getTypeEquipement["type_name"]; ?></option>	
+            								<?php 
+            									}
+            								 }
+            								?>
+            								</select>
+            							</div>
+            							<div class="clear"></div>
+            						  </div>
+
+                                    <div class="formRow fluid">
+                							<div class="grid4">
+                								<label><?php echo $this->translate('companyname')?>:<span class="req">*</span></label>
+                							</div>
+                							<div class="grid8">
+                								<div class="searchLine">
+                                                    <input style="height: 30px;" type="text" value="<?php echo $rows['equip_Name'];?>" placeholder="Enter search text..." class="ac ui-autocomplete-input" name="txtSearch"  id="txtSearch" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
+                                                    <button type="button" onclick="add();" name="btnSearch" value="Search" class="btnSearch" id="customDialog_open"><span class="icos-search"></span></button>
+                                                </div>
+                							</div>							
+                							<div class="clear"></div>
+            						  </div>
+                                    </form>
+                                    
+                                    <input type="hidden" readonly="readonly" value="<?php echo $rows['equip_Name'];?>" name="txtName" id="txtName"/>
+                                    <div class="formRow fluid">
+                							<div class="grid4">
+                								<label>SKU:<span class="req">*</span></label>
+                							</div>
+                							<div class="grid8">
+                								<input type="text" readonly="readonly" value="<?php echo $rows['equip_SKU'];?>" name="txtSKU"  id="txtSKU" class="required"/>
+                							</div>							
+                							<div class="clear"></div>
+            						  </div>  
+                                   
+                                      
+                                      
+                                      <div class="formRow fluid">
+                							<div class="grid4">
+                								<label><?php echo $this->translate('warranty')?>:<span class="req">*</span></label>
+                							</div>
+                							<div class="grid8">
+                								<input type="text" readonly="readonly" value="<?php echo $rows['equip_Warranty'];?>" name="txtWarranty"  id="txtWarranty" class="required"/>
+                							</div>							
+                							<div class="clear"></div>
+            						  </div>
+                                      
+                                      
+                                      <div class="formRow fluid">
+                							<div class="grid4">
+                								<label><?php echo $this->translate('warrantydate')?>:<span class="req">*</span></label>
+                							</div>
+                							<div class="grid8">
+                								<input type="text" readonly="readonly" value="<?php echo $rows['equip_Warrantydate'];?>" name="txtWarrantyDate"  id="txtWarrantyDate" class="required"/>
+                							</div>							
+                							<div class="clear"></div>
+            						  </div>
+            						
+            						
+            						
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companyaddress1')?>Description:<span class="req">*</span></label>
+            							</div>
+            							<div class="grid8">
+            								<textarea rows="3" cols="50" readonly="readonly" name="txtDescription" id="txtDescription" placeholder="<?php //echo $this->translate('selectmap')?>">
+            								<?php echo $rows['equip_Description'];?>
+            								</textarea>
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php echo $this->translate('frequence_maintenance')?>:</label>
+            							</div>
+            							<div class="grid3">
+            							<?php $equipFreqmaintnance = explode(" ", $rows['equip_Freqmaintnance']);?>
+            								<input type="text" value="<?php echo $equipFreqmaintnance[0];?>" name="txtFrequentMaintenance" id="txtFrequentMaintenance" placeholder="<?php echo $this->translate('frequence_maintenance')?>" />
+            							</div>
+                                        <div class="grid2">
+                                                     <?php
+														$select = 'selected';
+                                                        
+														if(empty($equipFreqmaintnance[1])){
+															$equipFreqmaintnance[1]="";
+														}
+														?> 
+                                            <select name="cboPeriodFrequentMaintenance" id="cboPeriodFrequentMaintenance" >
+                                                    <option value="1">---- <?php echo $this->translate('selectone')?> ----</option> 
+                									<option <?php echo ($equipFreqmaintnance[1] == 'Day'?$select:'');?>  value="Day"><?php echo $this->translate('day')?>(s)</option>
+                									<option <?php echo ($equipFreqmaintnance[1] == 'Week'?$select:'');?>  value="Week"><?php echo $this->translate('week')?>(s)</option>
+                									<option <?php echo ($equipFreqmaintnance[1] == 'Month'?$select:'');?> value="Month"><?php echo $this->translate('month')?>(s)</option>
+                									<option <?php echo ($equipFreqmaintnance[1] == 'Year'?$select:'');?> value="Year"><?php echo $this->translate('year')?>(s)</option>
+                								</select>
+                                        </div>
+            							<div class="clear"></div>
+            						</div>  
+                                   
+                                    <div class="formRow fluid">
+                							<div class="grid4">
+                								<label><?php echo $this->translate('frequence_maintenance_Date')?>:<span class="req">*</span></label>
+                							</div>
+                							<div class="grid8">
+                								<input type="text" value="<?php echo $rows['equip_Freqmaintnancedate']; ?>" name="txtFrequenceMaintenancedate"  class="datepicker"/>
+                							</div>							
+                							<div class="clear"></div>
+            						  </div>
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companycodepostal')?>GPS longitude:</label>
+            							</div>
+            							<div class="grid8">
+            								<div id="longitude"><input type="text" value="<?php echo $rows['equip_GPSLong'];?>" name="txtGPSlongitude" id="txtGPSlongitude" /></div>
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+                                    
+                                    <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companycodepostal')?>GPS latitude:</label>
+            							</div>
+            							<div class="grid8">
+            								<div id="latitude"><input type="text" value="<?php echo $rows['equip_GPSLatit'];?>" name="txtGPSlatitude" id="txtGPSlatitude" /></div>
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+                                    
+                                    <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companycodepostal')?>GPS altitude:</label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" value="<?php echo $rows['equip_GPSAlt'];?>" name="txtGPSaltitude" id="txtGPSaltitude" />
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+                                    <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companycodepostal')?>GPS altitude:</label>
+            							</div>
+            							<div class="grid8">
+            								<input type="hidden" value="" name="txtnote" id="txtnote" />
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+                                    <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php echo $this->translate('price_equipment')?>:</label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" value="<?php echo $rows['equip_Price'];?>" name="txtPriceEquipement" id="txtPriceEquipement" />
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+                                    
+                                    <div class="formRow fluid">
+                							<div class="grid4">
+                								<label><?php echo $this->translate('status')?>:</label>
+                							</div>
+                							<div class="grid8">
+                								<select name="cboStatus" id="cboStatus" class="required" >
+                									<option <?php echo ($rows["equip_Statut"]=="Inactif")?$selected:""?> value="Inactif">---- <?php echo $this->translate('selectone')?> ----</option>
+                									<option <?php echo ($rows["equip_Statut"]=="Actif")?$selected:""?>  value="Actif"><?php echo $this->translate('active')?></option>
+                									<option value="Inactif"><?php echo $this->translate('inactive')?></option>
+                								</select>
+                							</div>
+                							<div class="clear"></div>
+              						    </div>
+              						      <div class="formRow fluid">
+            							<div class="grid4">
+            								<label><?php //echo $this->translate('companycodepostal')?><?php echo $this->translate('reference')?> Equipement:</label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" readonly="readonly" value="<?php echo $rows['equip_Reference'];?>" name="txtReferenceEquipement" id="txtReferenceEquipement" />
+            							</div>
+            							<div class="clear"></div>
+            						</div>
+                                     
+                                  </div>
+                           </div>
+                           <!--The end grid 6-->
+                           
+                           
+                           <!-- grid 6 -->
+                           <div class="widget grid6">
+                                 <center><p style="font:bolder;" ><?php echo $this->translate('selectmap')?></p></center>
+                                    <div class="body">
+                                        <style>
+                            		.map {
+                            			height: 435px;
+                            			width: 100%;
+                            		}
+                            		.showmap .ui-dialog
+                            		{
+                            			background:#fff;
+                            			border:1px solid #ddd;
+                            			padding:5px;
+                            		}
+                            		.showmap .ui-dialog-content {height:10px!important;}
+                            		</style>
+                                    <script type="text/javascript" src="<?php echo $this->baseUrl ()?>/data/gmap/js/modernizr.min.js"></script>
+                                    <div id="map_canvas" class="map rounded"></div>
+                                    <div class="showmap">
+                                        <div id="dialog"></div>
+                                    </div>
+                                    
+                                    
+                                    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>  
+                                                               		
+                            		<script type="text/javascript" src="<?php echo $this->baseUrl ()?>/data/gmap/js/underscore-1.2.2/underscore.min.js"></script>
+                            		<script type="text/javascript" src="<?php echo $this->baseUrl ()?>/data/gmap/js/backbone-0.5.3/backbone.min.js"></script>
+                            		<script type="text/javascript" src="<?php echo $this->baseUrl ()?>/data/gmap/js/prettify/prettify.min.js"></script>
+                            		<script type="text/javascript" src="<?php echo $this->baseUrl ()?>/data/gmap/js/demo.js"></script>
+                            		<script type="text/javascript" src="<?php echo $this->baseUrl ()?>/data/gmap/js/jquery.ui.map.js"></script>
+                            		<script type="text/javascript" src="<?php echo $this->baseUrl ()?>/data/gmap/js/jquery.ui.map.services.js"></script>
+                            		<script type="text/javascript" src="<?php echo $this->baseUrl ()?>/data/gmap/js/jquery.ui.map.extensions.js"></script>
+                            		<script type="text/javascript">
+                                    <?PHP
+                                            $client  = @$_SERVER['HTTP_CLIENT_IP'];
+                                            $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+                                            $remote  = $_SERVER['REMOTE_ADDR'];
+                                            $result  = "France";
+                                            if(filter_var($client, FILTER_VALIDATE_IP))
+                                            {
+                                                $ip = $client;
+                                            }
+                                            elseif(filter_var($forward, FILTER_VALIDATE_IP))
+                                            {
+                                                $ip = $forward;
+                                            }
+                                            else
+                                            {
+                                                $ip = $remote;
+                                            }
+                                        
+                                            $ip_data = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
+                                        
+                                            if($ip_data && $ip_data->geoplugin_countryName != null)
+                                            {
+                                                $result = $ip_data->geoplugin_countryName;
+                                            }
+                                            else 
+                                            {
+                                                $result;
+                                            }
+                                        $address    = str_replace(" ","+",$result);
+                                              /*Query Google Geocoding API */
+                                            $ch = curl_init();
+                                            curl_setopt($ch, CURLOPT_URL, "http://maps.googleapis.com/maps/api/geocode/xml?address=".$address."&sensor=false");
+                                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                                            $xml = curl_exec($ch);                                            
+                                            
+                                            //Use SimpleXML library to get the data from the XML string
+                                            $xml = new SimpleXMLElement($xml);
+                                            $lat = $xml->result[0]->geometry[0]->location[0]->lat;
+                                            $lng = $xml->result[0]->geometry[0]->location[0]->lng;
+                                            $coords = $lat . "," . $lng;
+                                            curl_close($ch); //Close the CURL instance, to keep things tidy                                       
+                                        ?>
+                                        var mobileDemo = { 'center': '<?php echo $lat;?>,<?php echo $lng;?>', 'zoom': 10 };                                    
+                            				demo.add(function() {
+                            					$('#map_canvas').gmap({'center': mobileDemo.center, 'zoom': mobileDemo.zoom, 'disableDefaultUI':true, 'callback': function(map) {
+                            						var self = this;
+                            						self.set('openDialog', function(marker) {
+                            							$('#dialog'+marker.__gm_id).dialog({'modal':true, 'title': 'Edit and save point', 'buttons': { 
+                            								'No': function() { $(this).dialog('close'); marker.setMap(null); return false; },
+                            								'Save': function() { $(this).dialog('close'); return false; }
+                            							}});
+                            						});
+                            						self.set('findLocation', function(location, marker) {
+                            							self.search({'location': location}, function(results, status) {
+                            								if ( status === 'OK' ) {
+                            									$.each(results[0].address_components, function(i,v) {
+                            										if ( v.types[0] == "administrative_area_level_1" || v.types[0] == "administrative_area_level_2" ) {
+                            											$('#state'+marker.__gm_id).val(v.long_name);
+                            										} else if ( v.types[0] == "country") {
+                            											$('#country'+marker.__gm_id).val(v.long_name);
+                            										}
+                                                                    $('#latitude').html('<input type="text" id="latitude'+marker.__gm_id+'" class="txt" name="txtGPSlatitude" value=""/>');
+                                                                    $('#longitude').html('<input type="text" id="longitude'+marker.__gm_id+'" class="txt" name="txtGPSlongitude" value=""/>');
+                            									});
+                            									marker.setTitle(results[0].formatted_address);
+                            									$('#address'+marker.__gm_id).val(results[0].formatted_address);
+                            									self.get('openDialog')(marker);
+                            								}
+                            							});
+                            						});
+                            						$(map).click( function(event) {
+                            							self.addMarker({'position': event.latLng, 'draggable': true, 'bounds': false}, function(map, marker) {
+                            								$('#states').html('<input type="text" id="state'+marker.__gm_id+'" class="txt" name="Org_city" value=""/>');
+                            								$('#addresss').html('<textarea rows="3" cols="50" id="address'+marker.__gm_id+'" class="txt" name="Org_address1" ></textarea>');
+                            								$('#dialog').append('<form id="dialog'+marker.__gm_id+'" method="get" action="/" style="display:none;">Do you want to save?</form>');
+                            								self.get('findLocation')(marker.getPosition(), marker);
+                            							}).dragend( function(event) {
+                            								self.get('findLocation')(event.latLng, this);
+                            							}).click( function() {
+                            								self.get('openDialog')(this);
+                            							})
+                            						});
+                            					}});
+                            				}).load();                                       	
+                                    </script>
+                                    </div>
+                                </div>
+                                <!-- end gird 6 -->
+                                <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+						<a class="buttonS bGreyish" href="<?php echo  $this->url(array('Controller'=>'equipement','action'=>'index'));?>"><?php echo $this->translate('cancel')?></a>
+                        <input class="buttonS bBlue" type="submit" name="BtnUpdateEquipement" value="<?php echo $this->translate('update')?>" />
+                        <div class="clear"></div>
+                    </div>
+                    
+                    
+                </fieldset>
+            </form>
+        </div>
+		
+	</div>
+	<?php 
+       }
+	?>
+</div>                     
+
+                        
+                        <!-- Dialog content -->
+                        <div id="customDialog" class="customDialog" title="Dialog with other custom elements">
+                            <div id="test"></div>                            
+                        </div>

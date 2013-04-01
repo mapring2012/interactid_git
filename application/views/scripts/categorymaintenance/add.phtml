@@ -1,0 +1,67 @@
+<?php
+    $javascript ='';
+    $cssScript = '';
+    $pageTitle = $this->translate('create');
+    $cssScript = '<style>.formRow{padding: 5px 16px;}#main8 .widget{margin-top: 15px;}
+    .searchCreate .fluid{margin-bottom:10px;}
+    .searchLine {margin:0;}
+    </style>';
+    $breadLinks = '<ul><li><a title="" href="'.$this->baseUrl ().'/'.$this->translate('lang').'/'.$this->controller.'/add"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+    require_once TMP_USER_PATH;
+?>
+<div id="contentdata"> 
+<div class="wrapper">
+<div class="fluid">  
+ <form id="validate" class="main" method="post" action="<?php echo $this->url(array('action'=>'add'));?>">          
+                <fieldset>
+                    <div class="widget grid12">
+                        <div class="whead"><h6>Create Category Maintenance Name<?php //echo $this->translate('addtypeequipmentname')?></h6><div class="clear"></div></div>
+                        
+                        <div class="formRow">
+                            <!-- form create -->
+                                <div class="widget grid6">
+                                    
+                                    <div class="body">
+                               			<div class="formRow fluid">
+            							<div class="grid4">
+            								<label>Category Name<?php //echo $this->translate('companyname')?>:<span class="req">*</span></label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" value="" name="txtCatMaintenanceName"  id="txtCatMaintenanceName" class="required"/>
+            							</div>							
+            							<div class="clear"></div>
+            						</div>
+            						
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label>Description<?php //echo $this->translate('RaisonSocial')?>:<span class="req"></span></label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" value="" name="txtDescription" id="txtDescription" />
+            							</div>
+            						<div class="clear"></div>
+            						</div>      
+                                  </div>
+                           </div>
+                           <!--The end grid 6-->
+                          
+                                <div class="clear"></div>
+                        </div>
+                        
+                        <div class="formRow">
+						<a class="buttonS bGreyish" href="<?php echo  $this->url(array('Controller'=>'categorymaintenance','action'=>'index'));?>"><?php echo $this->translate('cancel')?></a>
+                        <input class="buttonS bRed" type="reset" name="btn_reset" value="<?php echo $this->translate('reset')?>" />
+                        <input class="buttonS bBlue" type="submit" name="BtnAddCategoryMaintenance" value="<?php echo $this->translate('submit')?>" />
+                        <div class="clear"></div>
+                    </div>
+                    
+                    
+                </fieldset>
+            </form>
+        </div>
+		
+	</div>
+</div>                     
+
+                

@@ -1,0 +1,97 @@
+<?php
+$javascript ='';
+$cssScript = '<style>
+td{text-align:center}
+.left{text-align:left}
+.bold{font-weight: bold}
+.underline{text-decoration: underline}
+.tableTitle{background-color: #EEEEEE;}
+.tableRow{background-color: white!important;}
+</style>';
+$pageTitle = $this->translate('workcard');
+$breadLinks = '<ul><li><a title="" href="'.$this->url(array('Controller' => 'equipement', 'action' => 'overview')).'"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+$content = $this->controller.'/'.$this->action.'.phtml';
+require_once TMP_USER_PATH;
+?>
+<div id="contentdata"> 
+	<div class="wrapper">
+    
+		<div class="widget justTable">
+			<table cellpadding="0" cellspacing="0" width="100%" class="tDefault">
+				<tbody>
+                    
+					<tr class="tableTitle">
+						<td class="bold" width="25%">N&#186; <?php echo $this->translate('noTypeEquipement')?></td>
+						<td class="bold" width="25%"><?php echo $this->translate('siteName')?></td>
+						<td class="bold" width="25%"><?php echo $this->translate('nomTypeEquipement')?></td>
+						<td class="bold" width="25%"><?php echo $this->translate('description')?></td>
+					</tr>
+					<tr class="tableRow" >
+						<td>Row 1</td>
+						<td>Row 2</td>
+						<td>Row 2</td>
+						<td>Row 2</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+        
+		<div class="grid12">
+			<div class="body">
+				<table width="100%" cellspacing="0" cellpadding="0" class="tDefault widget">
+					<tbody>
+						<tr  class="tableTitle bold" >
+							<td colspan="2">
+								Control visuel
+							</td>
+						</tr>
+						<tr class="tableRow bold underline">
+							<td width="50%">N&#186; Control</td>
+							<td><?php echo $this->translate('description')?></td>
+						</tr>
+						<tr class="tableRow">
+							<td>0001</td>
+							<td>description 0001</td>
+						</tr>
+						<tr class="tableRow">
+							<td>0002</td>
+							<td>description 0002</td>
+						</tr>
+						<tr class="tableRow">
+							<td>0003</td>
+							<td>description 0003</td>
+						</tr>
+					</tbody>
+				</table>
+                        
+				<table width="100%" cellspacing="0" cellpadding="0" class="tDefault widget">
+					<tbody>
+						<tr  class="tableTitle bold" >
+							<td colspan="2">
+								Control maintenance
+							</td>
+						</tr>
+						<tr class="tableRow bold underline">
+							<td width="50%">N&#186; Control</td>
+							<td><?php echo $this->translate('description')?></td>
+						</tr>
+						<tr class="tableRow">
+							<td>0001</td>
+							<td>description 0001</td>
+						</tr>
+						<tr class="tableRow">
+							<td>0002</td>
+							<td>description 0002</td>
+						</tr>
+						<tr class="tableRow">
+							<td>0003</td>
+							<td>description 0003</td>
+						</tr>
+					</tbody>
+				</table>   
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+   

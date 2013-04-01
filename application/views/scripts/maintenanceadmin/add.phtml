@@ -1,0 +1,507 @@
+<?php
+    $javascript ='';
+    $cssScript = '';
+    $pageTitle = $this->translate('create');
+    $cssScript = '<style>.formRow{padding: 5px 16px;}#main8 .widget{margin-top: 15px;}
+    .marinright{margin-right:50px;}
+    #addfield, .removerow, .cusors {cursor:pointer;cursor:hand}
+    .notsubmit {background:#999;border:1px soid #ddd;box-shadow:none; cursor:default!important;}
+    label.error{margin:0 0 5px!important}
+    </style>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+    require_once TMP_USER_PATH;    
+?>
+<div id="contentdata">
+    <div class="wrapper">	
+	   <div class="fluid">
+                <div class="widget grid12">       
+                    <ul class="tabs">
+                        <li class="tabl1 activeTab"><a href="#tabb1"><?php echo $this->translate('categorymanagent')?></a></li>
+                        <li class="tabl2"><a href="#tabb2"><?php echo $this->translate('maintenance')?></a></li>
+                        <li class="tabl3"><a href="#tabb3"><?php echo $this->translate('referencecode')?></a></li>
+                    </ul>
+                    
+                    <div class="tab_container">
+                        <div id="tabb1" class="tab_content">
+                            <form name="registerForm" id="registerForm"   enctype="multipart/form-data" id="usualValidate" class="main" method="post" action="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/add">
+                            <div id="main12">
+                            <!-- main grid8 -->
+            					<div class="grid12">
+                                    <div class="formRow">
+                                            <div class="grid4">
+                								<label><?php echo $this->translate('category')?>&nbsp;Equipement:<span class="req">*</span></label>
+                							</div>
+                                            <div class="grid8">
+                                          
+                                                <select name="txtCategoryEquipment" class="required" id="txtCateEquipement" >
+                                                    <option value="">---- <?php echo $this->translate('selectone')?> ----</option>
+                                                      <?php
+                                                        if(count($this->getCateQuipment)>0) { 
+                                                           foreach($this->getCateQuipment as $catName){
+                                                               
+                                                           
+                                                      ?>
+                                                    <option value="<?php echo $catName['type_id']?>"><?php echo  $catName['type_name']?></option>
+                                                    <?php } }?>
+                                                </select>
+                                                <label for="txtCateEquipement" class="error txtCateEquipementLabel" style="display: none;"><?php echo $this->translate('requiredfile')?></label>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>                       
+                                        <div class="formRow fluid">
+                							<div class="grid4">
+                								<label><?php echo $this->translate('category')?>&nbsp;<?php echo $this->translate('companyname')?>:<span class="req">*</span></label>
+                							</div>
+                							<div class="grid8">
+                								<input type="text" value="" name="txtCatMaintenanceName"  id="txtCatMaintenanceName" class="required"/>
+                                                  <label for="txtCatMaintenanceName" class="error txtCatMaintenanceNameLabel" style="display: none;"><?php echo $this->translate('requiredfile')?></label>
+                							</div>							
+                							<div class="clear"></div>
+                						</div>
+                						
+                						<div class="formRow fluid">
+                							<div class="grid4">
+                								<label>Description<?php //echo $this->translate('RaisonSocial')?>:<span class="req"></span></label>
+                							</div>
+                							<div class="grid8">
+                								<input type="text" value="" name="txtDescriptionCat" id="txtDescription" />
+                							</div>
+                						<div class="clear"></div>
+                						</div>
+
+                                   <!--The end grid 6-->   
+                                        <!-- end  conent tab1 -->
+                                        <div class="clear"></div>
+                                        <div class="formRow fluid"><div class="clear"></div> </div>
+                                        
+                                        <div class="formRow">
+                                        <div class="body">
+                                        <br/>
+                                             <a class="buttonS bGreyish" href="<?php echo  $this->url(array('Controller'=>'organisme','action'=>'index'));?>"><?php echo $this->translate('cancel')?></a>&nbsp;&nbsp;&nbsp;
+                                            <input class="buttonM bRed" id="back3" value="<?php echo $this->translate('reset')?>" type="reset" />                                            
+                                			<input id="btnCatMain" style="" class="buttonM bBlue ml10" name="btnCatMain" value="<?php echo $this->translate('submit')?>" type="submit"/>
+                                            
+                                        </div>
+                                     </div>
+                                </div>
+                            </div> 
+                            </form>           
+                        </div>
+                        
+                        
+                        <div id="tabb2" class="tab_content"> 
+                        <form name="registerForm" id="registerForm"   enctype="multipart/form-data" id="usualValidate" class="main" method="post" action="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/add">
+                        	<div id="main12">
+                                <!-- main grid8 -->
+            					<div class="grid12">                        
+                                        <!-- form inside -->
+                                        <div class="formRow">
+            		                        <div class="grid4"><label>Maintenance&nbsp;<?php echo $this->translate('companyname')?>:<span class="req">*</span></label></div>
+            		                        <div class="grid6"><input type="text" value="" name="txtmaintenance" id="txtmaintenance" class="required" />
+                                            <label for="txtmaintenance" class="error txtmaintenanceLabel" style="display: none;"><?php echo $this->translate('requiredfile')?></label>
+                                          
+                                            </div>
+            		                        <div class="clear"></div>
+                         			    </div>
+                                        
+                                        <div class="formRow">
+            		                        <div class="grid4"><label>Description:<span class="req"></span></label></div>
+            		                        <div class="grid6"><textarea name="txtdescriptionMain"></textarea></div>
+            		                        <div class="clear"></div>
+                         			    </div>
+                                        
+                                        
+                         			     
+                                        <div class="formRow">
+            		                        <div class="grid4"><label>Maintenance Usage:</label></div>
+            		                        <div class="grid6">
+            		                        	<input type="text" value="" name="UsageMaintenance" id="UsageMaintenance" />
+                                                <!--<label for="users_title" class="error users_titleLabel" style="display: none;"><?php //echo $this->translate('requiredfile')?></label>-->
+            		                        </div><div class="clear"></div>
+                         			    </div>
+                                        
+                                          
+                                        <div class="formRow">
+            		                        <div class="grid4"><label>Maintenance&nbsp;<?php echo $this->translate('companylevel')?>:<span class="req">*</span></label></div>
+            		                        <div class="grid6">
+                                                <select name="MaintenanceType" class="required" id="MaintenanceType">
+                                                    <option value="">---- <?php echo $this->translate('selectone')?> ----</option>
+                                                    <option value="1">Level 1</option>
+                                                    <option value="2">Level 2</option>
+                                                    <option value="3">Level 3</option>
+                                                    <option value="4">Level 4</option>
+                                                    <option value="5">Level 5</option>
+                                                </select>            		                        	
+                                                <label for="MaintenanceType" class="error txtmaintenancetyleLabel" style="display: none;"><?php echo $this->translate('requiredfile')?></label>
+									
+            		                        </div><div class="clear"></div>
+                         			    </div>
+                                        <div class="formRow">
+                                        <div class="body">
+                                        <br/>
+                                             <a class="buttonS bGreyish" href="<?php echo  $this->url(array('Controller'=>'organisme','action'=>'index'));?>"><?php echo $this->translate('cancel')?></a>&nbsp;&nbsp;&nbsp;
+                                            <input class="buttonM bRed" id="back3" value="<?php echo $this->translate('reset')?>" type="reset" />                                            
+                                			<input id="btnMain" style="" class="buttonM bBlue ml10" name="btnMain" value="<?php echo $this->translate('submit')?>" type="submit"/>
+                                            
+                                        </div>
+                                     </div>
+                                        <!-- end inside tab2 -->
+                                </div>
+                            </div>
+                            </form>  
+                        </div>
+                       <!-- end tab2 --> 
+                        
+                        <div id="tabb3" class="tab_content"> 
+                        <form name="registerForm" id="registerForm"   enctype="multipart/form-data" id="usualValidate" class="main" method="post" action="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/add">
+                        	<div id="main12">
+                                <!-- main grid8 -->
+            					<div class="grid12">                        
+                                        <!-- form inside -->
+                                        <div class="formRow fluid">
+                                            <div class="grid11">
+                                                <div class="grid3">
+                        							<label><?php echo $this->translate('orderby')?>:</label>                        							
+                                                </div>
+                                                <div class="grid3">
+                                                    <label><?php echo $this->translate('code')?>:</label>                                                    
+                                                </div>
+                                                <div class="grid3">
+                    								<label><?php echo $this->translate('label')?>:&nbsp;<span style="color:red;">*</span></label>                                                    
+                    							</div>
+                                                <div class="grid3">
+                    								<label><?php echo $this->translate('description')?>:</label>                                                   
+                    							</div>
+                    							<div class="clear"></div>
+                    						</div>
+                                            <div class="grid1">
+                                                <div id="addfield" class="tablectrl_small bDefault"><span class="iconb" data-icon="&#xe14a;"></span></div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div id="morefield">                                        
+                                        <div class="formRow fluid">
+                                        
+                                            <div class="grid11">
+                                                <div class="grid3">
+                        							<input type="text" value="" name="txtOrderby[]"  id="txtOrderby" class=""/>
+                                                </div>
+                                                <div class="grid3">
+                                                    <input type="text" value="" name="txtCode[]"  id="txtCode" class=""/>
+                                                </div>
+                                                <div class="grid3">
+                    								<input type="text" value="" name="txtLabel[]"  id="txtLabel" class=""/>
+                    							</div>
+                                                <div class="grid3">
+                                                    <textarea placeholder="Your message"  name="txtDescription[]"  id="txtDescription" cols="" rows="1"></textarea>
+                    							</div>
+                    							<div class="clear"></div>
+                    						</div>
+                                            <div class="grid1">
+                                                
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- end content tab3 -->
+                                        
+                                        
+                                </div>
+                            </div> 
+                             </form> 
+                        </div>
+                       <!-- end tab3 --> 
+                    </div>	
+                    <div class="clear"></div>		 
+                </div>
+                <div class="clear"></div>
+                				
+            </div>
+        </div>
+    </div>
+<script>
+$(document).ready(function(){    
+	/* start append 4 field in reference maintenace */
+  	$("#addfield").click(function(){
+    	$("#morefield").append('<ul><li><div id="idremove" class="formRow fluid"><div class="grid11"><div class="grid3"><input type="text" value="" name="txtOrderby[]"  id="txtOrderby" class=""/></div><div class="grid3"><input type="text" value="" name="txtCode[]"  id="txtCode" class=""/></div><div class="grid3"><input type="text" value="" name="txtLabel[]"  id="txtLabel" class=""/></div><div class="grid3"><textarea placeholder="Your message"  name="txtDescription[]"  id="txtDescription" cols="" rows="1"></textarea></div><div class="clear"></div></div><div class="grid1"><div class="removerow tablectrl_small bDefault"><span class="iconb" data-icon="&#xe14c;"></span></div></div></div></li></ul>');
+  	});
+  	/* end append 4 field in reference maintenace */
+
+  	/* start remove 4 field */
+	$("ul li .removerow").live("click", function() {  
+         $(this).parent().parent().remove();
+  	});
+	/* end remove 4 field */
+  
+    
+<<<<<<< .mine
+=======
+    $("#next3").click(function(){
+        	var txtmaintenance=$("#txtmaintenance").val();
+			var MaintenanceType=$("#MaintenanceType").val();
+            if (txtmaintenance==null || txtmaintenance==""){
+                $('.txtmaintenanceLabel').show();
+            	return false;
+			}else if(MaintenanceType==null || MaintenanceType==""){
+				$('.txtmaintenancetyleLabel').show();
+			}else{
+		        $(".tabl2").removeClass("activeTab");
+		        $(".tabl3").addClass("activeTab");
+		        $("#back2").show();
+		        $("#back1").hide();
+		        $("#next3").hide();
+		        $("#next2").hide();
+		        $("#tabb1").hide();
+		        $("#tabb2").hide();
+		        $("#tabb3").show();
+		        $("#submitform").show();
+        }
+    });
+    /* end button next2 and next3 */
+    
+    /* start tab1,tab2,and tab3 */
+    $(".tabl1").click(function(){
+    	var txtCateEquipement=$("#txtCateEquipement").val();
+    	var txtCatmaintenanc=$("#txtCatMaintenanceName").val();
+    	//var txtmaintenanc=$("#txtmaintenance").val();
+    	$("#txtCateEquipement").change(function(){
+				$('.txtCateEquipementLabel').hide();
+        }); 
+        //$('.txtCatMaintenanceNameLabel').hide();
+
+        $("#txtCatMaintenanceName").focus(function(){
+        	$('.txtCatMaintenanceNameLabel').hide();
+        });
+        
+		if(txtCateEquipement==null || txtCateEquipement==""){
+			//$('.txtCatmaintenancLabel').hide();	
+			$('.txtCateEquipementLabel').show();
+			$(".tabl2").removeClass("activeTab");
+	        $(".tabl3").removeClass("activeTab");
+	        $(".tabl1").addClass("activeTab");
+	        return false;
+			
+		}else if (txtCatmaintenanc==null || txtCatmaintenanc==""){
+			//$('.txtCateEquipementLabel').hide();	
+			$('.txtCatmaintenancLabel').show();
+			$(".tabl2").removeClass("activeTab");
+	        $(".tabl3").removeClass("activeTab");
+	        $(".tabl1").addClass("activeTab");
+	        return false;
+		}else if(txtCateEquipement==null ||  txtCateEquipement==""  && txtCatmaintenanc==null || txtCatmaintenanc=="" ){
+			$('.txtCateEquipementLabel').show();
+			$('.txtCatmaintenancLabel').show();
+			$(".tabl2").removeClass("activeTab");
+	        $(".tabl3").removeClass("activeTab");
+	        $(".tabl1").addClass("activeTab");
+	        return false;
+		}else{
+	        $(".tabl2").removeClass("activeTab");
+	        $(".tabl3").removeClass("activeTab");
+	        $(".tabl1").addClass("activeTab");
+	        $("#back1").hide();
+	        $("#next3").hide();
+	        $("#next2").show();
+	        $("#submitform").hide();
+		}
+    });
+    
+    $(".tabl2").click(function(){
+        var txtCateEquipement=$("#txtCateEquipement").val();
+        var txtCatmaintenanc=$("#txtCatMaintenanceName").val();
+        var txtmaintenanc=$("#txtmaintenance").val();
+        $('.txtmaintenanceLabel').hide();
+        $("#txtmaintenance").focus();
+        	
+        $("#txtmaintenance").focus(function(){
+        	$('.txtmaintenanceLabel').hide();
+        });
+           
+        if ( txtCateEquipement==null || txtCateEquipement ==""){
+             $('.txtCateEquipementLabel').show();
+             alert('<?php echo $this->translate('c_equipment')?>');
+             $(".tabl3").removeClass("activeTab");
+             $(".tabl2").addClass("activeTab");
+             return false;
+        }else if( txtCatmaintenanc==null || txtCatmaintenanc==""){
+        	$('.txtCatMaintenanceNameLabel').show();
+        	alert('<?php echo $this->translate('c_maintenance_name')?>');
+            $(".tabl1").removeClass("activeTab");
+            $(".tabl3").removeClass("activeTab");
+            $(".tabl2").addClass("activeTab");
+            return false;
+        }else if(txtmaintenanc==null || txtmaintenanc==""){
+                $('.txtmaintenanceLabel').show();
+                $(".tabl1").removeClass("activeTab");
+    	        $(".tabl3").removeClass("activeTab");
+    	        $(".tabl2").addClass("activeTab");
+    	        //$('.txtmaintenanceLabel').show();
+                return false;
+        }else{
+	        $(".tabl1").removeClass("activeTab");
+	        $(".tabl3").removeClass("activeTab");
+	        $(".tabl2").addClass("activeTab");
+	        $("#back1").show();
+	        $("#back2").hide();
+	        $("#next3").show();
+	        $("#next2").hide();
+	        $("#submitform").hide();
+        }
+       
+    });
+    
+    $(".tabl3").click(function(){
+   		var txtCateEquipement=$("#txtCateEquipement").val();
+        var txtCatmaintenanc=$("#txtCatMaintenanceName").val();
+        var txtMName=$("#txtmaintenance").val();
+        $('.txtmaintenanceLabel').hide();
+
+            	if( txtCateEquipement==null || txtCateEquipement==""){
+	                //$('.txtCateEquipementLabel').show();
+	                alert('<?php echo $this->translate('c_equipment')?>');
+	                $(".tabl3").removeClass("activeTab");
+	                $(".tabl2").addClass("activeTab");
+	                //$("#submitform").attr('disabled','disabled');
+	                $("#submitform").addClass("notsubmit");
+            	}else if(txtCatmaintenanc==null || txtCatmaintenanc==""){
+            		//$('.txtCatMaintenanceNameLabel').show();
+	                alert('<?php echo $this->translate('c_maintenance_name')?>');
+	                $(".tabl3").removeClass("activeTab");
+	                $(".tabl2").addClass("activeTab");
+	                //$("#submitform").attr('disabled','disabled');
+	                $("#submitform").addClass("notsubmit");
+                }else if(txtMName==null || txtMName==""){
+                	$('.txtmaintenanceLabel').show();
+	                 alert('<?php echo $this->translate('M_name')?>');
+	                 $(".tabl3").removeClass("activeTab");
+	                 $(".tabl2").removeClass("activeTab");
+	                 $(".tabl1").addClass("activeTab");
+	                 $("#submitform").show();
+	                 //$("#submitform").attr('disabled','disabled');
+	                 $("#submitform").addClass("notsubmit");
+               }
+        
+	        $(".tabl1").removeClass("activeTab");
+	        $(".tabl2").removeClass("activeTab");
+	        $(".tabl3").addClass("activeTab");
+	        $("#back2").show();
+	        $("#back1").hide();
+	        $("#next3").hide();
+	        $("#next2").hide();
+	        //$("#submitform").attr('disabled','enabled');
+	        $("#submitform").show();
+       
+    });
+    /* end tab1,tab2,and tab3 */
+
+    /* start back1 and back2 */
+  $("#back1").click(function(){
+        $(".tabl2").removeClass("activeTab");
+        $(".tabl1").addClass("activeTab");
+        $("#back1").hide();
+        $("#next3").hide();
+        $("#next2").show();
+        $("#tabb1").show();
+        $("#tabb2").hide();
+        $("#tabb3").hide();
+        $("#submitform").hide();
+    }); 
+    
+    $("#back2").click(function(){
+        $(".tabl3").removeClass("activeTab");
+        $(".tabl2").addClass("activeTab");
+        $("#back1").show();
+        $("#next3").show();
+        $("#next2").hide();
+        $("#back2").hide();
+        $("#tabb1").hide();
+        $("#tabb2").show();
+        $("#tabb3").hide();
+        $("#submitform").hide();
+    });
+    /* end back1 and back2 */
+    
+    /*start button submitform*/
+    $("#submitform").click(function(){
+        
+    	var txtCateEquipement=$("#txtCateEquipement").val();
+        var txtCatmaintenanc=$("#txtCatMaintenanceName").val();
+        var txtMName=$("#txtmaintenance").val();
+        var txtLabel=$("#txtLabel").val();
+		var MaintenanceType=$("#MaintenanceType").val();
+        
+        $("#txtCateEquipement").change(function(){
+			$('.txtCateEquipementLabel').hide();
+    	});
+      if(txtCateEquipement==null || txtCateEquipement==""){
+	       	 $(".tabl2").removeClass("activeTab");
+	         $(".tabl3").removeClass("activeTab");
+	         $(".tabl1").addClass("activeTab");
+	         $("#submitform").hide();
+	         $("#tabb1").show();
+	         $("#tabb2").hide();
+	         $("#tabb3").hide();
+	         $('.txtCatmaintenancLabel').hide();
+	         $('.txtCateEquipementLabel').show();
+	         return false;
+      }else if (txtCatmaintenanc==null || txtCatmaintenanc=="" ){
+            $(".tabl2").removeClass("activeTab");
+            $(".tabl3").removeClass("activeTab");
+            $(".tabl1").addClass("activeTab");
+            $("#submitform").hide();
+            $("#tabb1").show();
+            $("#tabb2").hide();
+            $("#tabb3").hide();
+            $('.txtCateEquipementLabel').hide();
+            $('.txtCatMaintenanceNameLabel').show();
+            return false;
+        }else if (txtMName==null || txtMName==""){
+            $(".tabl1").removeClass("activeTab");
+            $(".tabl3").removeClass("activeTab");
+            $(".tabl2").addClass("activeTab");
+            $("#submitform").hide();
+            $("#tabb2").show();
+            $("#tabb1").hide();
+            $("#tabb3").hide();
+            $('.txtmaintenanceLabel').show();
+            return false;
+        }else if (txtLabel==null || txtLabel==""){
+        	$(".tabl1").removeClass("activeTab");
+            $(".tabl2").removeClass("activeTab");
+            $(".tabl3").addClass("activeTab");
+            $("#submitform").hide();
+            $("#tabb1").hide();
+            $("#tabb2").hide();
+            $("#tabb3").show();
+        	$('.txtLabelLabel').show();
+            return false;  
+        }else if(MaintenanceType==null || MaintenanceType==""){
+			$(".tabl1").removeClass("activeTab");
+            $(".tabl2").removeClass("activeTab");
+            $(".tabl3").addClass("activeTab");
+            $("#submitform").hide();
+            $("#tabb1").hide();
+            $("#tabb2").hide();
+            $("#tabb3").show();
+        	$('.txtLabelLabel').show();
+            return false; 
+		}
+    });
+    /*end button submitform*/
+    
+>>>>>>> .r1255
+});
+ 
+</script>
+<?php
+$javascriptbotton ='<script>        $(document).ready(function(){
+        var tab="'.$this->tabActive.'";
+        if(tab==2){
+          $(".tabl1").removeClass("activeTab");          
+          $(".tabl2").addClass("activeTab");  
+          $("#tabb2").show();
+          $("#tabb1").hide();  
+          }     
+        });</script>';
+?>

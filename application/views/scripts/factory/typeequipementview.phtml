@@ -1,0 +1,72 @@
+<?php
+    $javascript ='';
+    $cssScript = '<style>.widget .body{background:#fff;padding:0;}.widget{border:1px solid #ddd;}
+    td:first-child { background:#eee}td:first-child + td { font-weight:bold;background:#fff;}background:#eee}td:first-child + td { font-weight:bold;background:#fff;}td:first-child + td + td { font-weight:bold;background:#eee;}td:first-child + td + td + td{ font-weight:bold;background:#fff;}#map_canvas {height: 250px;width: 100%;}</style>';
+    $pageTitle = $this->translate('overview');
+    $breadLinks = '<ul><li><a title="" href="'.$this->baseUrl ().'/'.$this->translate('lang').'/'.$this->controller.'/typeequipementindex"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+    require_once TMP_USER_PATH;
+?>
+<div id="contentdata"> 
+    <div class="wrapper">
+        <div class="fluid">
+            <div class="widget grid12"> 
+             <?php  foreach ($this->TypeOverview as $ValueOV):?>
+                 <div class="whead">
+                 <a class="buttonH bRed right" href="<?php echo  $this->url(array('Controller'=>'factory','action'=>'typeequipementindex'));?>"><?php echo $this->translate('back')?></a>
+                 <a title="" class="buttonH bBlue right" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php  echo $this->controller?>/typeequipementedit?actions=edit&&id=<?php echo $ValueOV['type_id'];?>">Éditer</a>
+				
+						<h6>Type Equipement</h6>
+						<div class="clear"></div>
+					</div> 
+
+                        <table width="100%" cellspacing="0" cellpadding="0" class="tDefault">
+                       
+                         <?php  $selected='selected'; ?>
+                          <input type="hidden" name="hiddenID" value="<?php echo $ValueOV['type_id'];?>" />
+                            <tbody>                                
+                                <tr>
+                                    <td width="200">N.Ref Type</td>
+                                    <td width="600">000<?php echo $ValueOV['type_id'];?></td>
+                                    <td rowspan="6">Description</td>
+                                    <td rowspan="6"><?php echo $ValueOV['type_description'];?></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td width="200"><?php echo $this->translate('companyname')?></td>
+                                    <td width="600"><?php echo $ValueOV['type_name'];?></td>
+                                    
+                                </tr>
+                                 <tr>
+                                    <td width="200">Factory</td>
+                                    <td width="600"><?php echo $ValueOV['Fou_Name'];?></td>
+                                    
+                                </tr>
+                                 <tr>
+                                    <td width="200"><?php echo $this->translate('reference')?></td>
+                                    <td width="600"><?php echo $ValueOV['type_ref'];?></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td width="200"><?php echo $this->translate('createdate')?></td>
+                                    <td width="600"><?php echo $ValueOV['type_createdate'];?></td>
+                                </tr>
+                                <tr>
+                                    <td width="200"><?php echo $this->translate('modifydate')?></td>
+                                    <td width="600"><?php echo $ValueOV['type_modifdate'];?></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                        
+
+
+             <!-- end  formRow --> 	
+                <div class="clear"></div>		 
+            </div>    
+            <?php endforeach;?>            
+        </div>
+      
+    </div>
+</div>
+   

@@ -1,0 +1,97 @@
+<?php
+    $javascript ='';
+    $cssScript = '<style>.widget .body{background:#fff;padding:0;}.widget{border:1px solid #ddd;}
+    td:first-child { background:#eee}td:first-child + td { font-weight:bold;background:#fff;}background:#eee}td:first-child + td { font-weight:bold;background:#fff;}td:first-child + td + td { font-weight:bold;background:#eee;}td:first-child + td + td + td{ font-weight:bold;background:#fff;}#map_canvas {height: 250px;width: 100%;}</style>';
+    $pageTitle = $this->translate('overview');
+    $breadLinks = '<ul><li><a title="" href="'.$this->url(array('Controller' => '', 'action' => 'equipementadd')).'"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+    require_once TMP_USER_PATH;
+?>
+<?php  foreach ($this->getrecordOverviewEquip as $ValueOV):?>
+<div id="contentdata"> 
+    <div class="wrapper">
+        <div class="fluid">
+            <div class="widget grid12"> 
+                 <div class="whead">
+                 <a class="buttonH bRed right" href="<?php echo  $this->url(array('Controller'=>'typeequipement','action'=>'equipementindex'));?>"><?php echo $this->translate('back')?></a>
+                 <a title="" class="buttonH bBlue right" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/equipementedit?actions=edit&id=<?php echo $ValueOV['equip_id'];?>">Éditer</a>
+				
+						<h6><?php echo $this->translate('overview')?></h6>
+						<div class="clear"></div>
+					</div> 
+						
+						<div class="grid12" style="margin-left:0">
+                        <table width="100%" cellspacing="0" cellpadding="0" class="tDefault">
+                        
+                          <?php  $selected='selected'; ?>
+                          <input type="hidden" name="hiddenID" value="<?php echo $ValueOV['equip_name'];?>" />
+                            <tbody>
+                                <tr>
+                                	<td width="200">Image</td>
+                                    <td width="600"><img style="width: 80px; height:80px;"  src="<?php echo $this->baseUrl();?>/data/uploads/thumb/<?php echo $ValueOV['equip_img'];?>"/></td>
+                                    
+                                    <td width="200">Description</td>
+	                                <td width="600"><?php echo $ValueOV['equip_description'];?></td>
+                                    
+                                </tr>
+                                <tr>
+                                	<td width="200"><?php echo $this->translate('companyname')?></td>
+                                    <td width="600"><?php echo $ValueOV['equip_name'];?></td>
+                                    <td width="200"><?php echo $this->translate('warranty')?></td>                                    
+	                                <td width="600"><?php echo $ValueOV['equip_warranty'];?></td>
+                                                                       
+                                </tr>
+                                <tr>
+                                	<td width="200">Type Equipement</td>
+                                    <td width="600"><?php echo $ValueOV['type_name'];?></td>
+                                    <td width="200"><?php echo $this->translate('warrantydate')?></td>                                    
+	                                <td width="600"><?php echo $ValueOV['equip_warrantydate'];?></td>
+                                </tr>
+                                
+                                <tr>
+                                	<td width="200">Origine</td>                                    
+                                    <td width="600"><?php echo $ValueOV['equip_origine'];?></td>
+                                    <td width="200">Date Fab</td>                                    
+	                                <td width="600"><?php echo $ValueOV['equip_datefab'];?></td>
+                                </tr>
+                                
+                                <tr>
+                                	<td width="200"><?php echo $this->translate('provider')?></td>                                    
+                                    <td width="600"><?php echo $ValueOV['Fou_Name'];?></td>
+                                    <td width="200"><?php echo $this->translate('createdate')?></td>
+	                                <td width="600"><?php echo $ValueOV['equip_createdate'];?></td>
+                                </tr>
+                                
+                                <tr>
+                                	<td width="200"><?php echo $this->translate('freqmaintenance')?></td>
+                                    <td width="600"><?php echo $ValueOV['equip_freqmaintance'];?></td>
+                                    <td width="200"><?php echo $this->translate('modifydate')?></td>
+	                                <td width="600"><?php echo $ValueOV['equip_modifdate'];?></td>
+                                </tr>
+                                
+                                <tr>
+                                	<td width="200">SKU</td>
+                                    <td width="600"><?php echo $ValueOV['equip_SKU'];?></td>
+                                    <td width="200">Documents</td>    
+                                    <?php if($ValueOV['equip_notice']!=""){?>                                
+	                                <td width="600"><a href="<?php echo $this->baseUrl();?>/data/documents/<?php echo $ValueOV['equip_notice'];?>">Download</a></td>
+                                    <?php }else {?>
+                                    	<td width="600">No ducument download</td>
+                                    <?php } ?>
+                                </tr>                                
+                            </tbody>
+                        </table>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        
+             <!-- end  formRow --> 	
+                <div class="clear"></div>		 
+            </div>                
+        </div>
+    </div>
+</div>
+<?php endforeach;?>   

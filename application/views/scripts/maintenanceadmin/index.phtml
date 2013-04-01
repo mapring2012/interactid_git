@@ -1,0 +1,152 @@
+<?php
+    $javascript ='';
+    $cssScript = '';
+    $pageTitle = 'Mainternance';
+    $content = $this->controller.'/'.$this->action.'.phtml';
+    $breadLinks = '<ul><li><a title="" href="'.$this->baseUrl ().'/'.$this->translate('lang').'/'.$this->controller.'/add"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+    require_once TMP_USER_PATH;
+?>
+<style type="text/css">
+.cuser {float:right;margin:20px 0 -20px 0}
+.adduser {font-size:20px;float:right;}
+.addusertxt {float:right;padding: 0 0 0 5px;
+ font-size: 16px;
+    font-weight: bold;
+    line-height: 23px;
+    margin-left: 0;
+    padding: 0 5px;
+    padding-right: 15px;
+    text-decoration: none;
+    text-shadow: 1px 1px #EFEFEF;
+}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $("#research").hide();
+        $("#basic_search").show();
+	$('#advancedsearch').click(function(){
+    $("#basic_search").hide();
+	$("#research").slideToggle();
+	$("#research").show();
+	$("#basicsearch").click(function(){
+		 $("#research").hide();
+         $("#basic_search").show();
+		});
+	});
+});
+</script>
+<script>
+	$(document).ready(function(){
+		$("#BtnDelMaintenance").attr('disabled','disabled');
+		var row=$(this).prop('checked',true);
+        $("#actionSelect").change(function(){
+			if($(this).val()==''){
+				$("#BtnDelMaintenance").attr('disabled','disabled');
+			}else if($(this).val()=='Delete'){
+				$("#BtnDelMaintenance").attr('disabled','disabled');
+				if($(this).val()=='Delete' && row){
+					$("#BtnDelMaintenance").removeAttr('disabled');
+				}else if($(this).val()=='Delete'){
+					$("#BtnDelMaintenance").attr('disabled','disabled');
+				}
+			}
+			
+        });
+	});
+	
+</script>
+<div id="contentdata">
+	<div class="wrapper">
+
+		
+			<div class="tab_container">
+            <form method="post"
+			action="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/delete"
+			id="SiteForm" name="SiteForm">
+            <div class="widget check">
+                    <div class="whead">
+						<span class="titleIcon" style="width: 41px;"> <input
+							type="checkbox" id="titleCheck" name="titleCheck" />
+						</span>
+						<h6>Mainternance<?php //echo $this->translate('vieworganisme')?></h6>
+						<div class="clear"></div>
+					</div>
+                    <div id="dyn2" class="shownpars">                    
+                    <table cellpadding="0" cellspacing="0" width="100%"
+						class="dTable tDefault checkAll tMedia" id="checkAll">
+						<thead>
+							<tr>
+								<td><img src="<?php echo $this->baseUrl();?>/images/elements/other/tableArrows.png" alt="" /></td>
+								<td class="sortCol" width="150"><div>
+										N<sup>o</sup>&nbsp;&nbsp;<?php echo $this->translate('reference')?><span></span>
+									</div></td>
+									<td class="sortCol"><div>Maintenance Type<?php //echo $this->translate('companyname')?><span></span>
+									</div></td>
+								<td class="sortCol"><div>Mainternace on<?php //echo $this->translate('RaisonSocial')?><span></span>
+									</div></td>
+								<td class="sortCol"><div><?php echo $this->translate('createdate')?><span></span>
+									</div></td>
+                                    <td class="sortCol"><div><?php echo $this->translate('modifydate')?><span></span>
+									</div></td>
+									<td>Action</td>
+									
+							
+								
+							</tr>
+						</thead> 
+						<!-- Multiple delete action -->
+                        <tfoot>
+							<tr>
+								<td colspan="8">
+									<div class="itemActions">										
+										<select id="actionSelect" name="multiAction">
+											<option value="">---- <?php echo $this->translate('selectone')?> ----</option>
+											<option value="Delete"><?php echo $this->translate('delete')?></option>
+										</select>
+									</div>
+									<input  onclick="return confirm('<?php echo $this->translate('areyousure') ?>')" style="margin-top: 6px; margin-left: 5px; height: 28px;" class="tablectrl_medium bDefault" type="submit"  value="<?php echo $this->translate('apply')?>" name="BtnDelMaintenance" id="BtnDelMaintenance" />
+									
+					
+                            </td>
+						</tr>
+						
+						</tfoot>
+                       <!-- Multiple delete action -->
+						<tbody>
+                    <?php 
+                      if(count($this->getMaintenace)!=0){
+	   					foreach ($this->getMaintenace as $alldata){	   				
+	   				?>
+	   				<tr class="row<?php echo $alldata['main_id']?>">
+	   					<td><input type="checkbox" name="checkRow[]" id="checkRow" value="<?php echo $alldata['main_id'];?>" /></td>
+	   					<td>000<?php echo $alldata['main_id'];?></td>	
+	   					<td><a href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/overview?actions=overview&id=<?php echo $alldata['main_id']; ?>"><?php echo $alldata['catmain_name'];?></a></td>
+						<td><a href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/overview?actions=overview&id=<?php echo $alldata['main_id']; ?>"><?php echo $alldata['main_name'];?></a></td>
+	   					<td><?php echo $alldata['main_createdate'];?></td>
+                        <td><?php echo $alldata['main_modifdate'];?></td>
+                        
+                        <td class="tableActs noBorderB" align="center">
+                            <a href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/edit?actions=edit&&id=<?php echo $alldata['main_id'];?>" class="tablectrl_small bBlue tipS" original-title="<?php echo $this->translate('edit')?>"><span class="iconb" data-icon="&#xe1db;"></span></a>
+                            
+                            <a href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/delete?actions=delete&&id=<?php echo $alldata['main_id'];?>" class="tablectrl_small bRed tipS" original-title="<?php echo $this->translate('remove')?>" onclick="return confirm('<?php echo $this->translate('areyousure') ?>')"><span class="iconb" data-icon="&#xe136;"></span></a>
+                            
+                        </td>
+                     
+	   				</tr>
+	   				<?php 
+	   					}
+	   				}
+ 					?>
+						</tbody>
+					</table>
+                    </div>
+            </div>
+            </form>
+    	</div>
+</div>
+	<div class="clear"></div>
+ 
+
+	
+</div>
+</div>

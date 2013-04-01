@@ -1,0 +1,191 @@
+
+<?php
+$javascript = '';
+$cssScript = '';
+$pageTitle = $this->translate('typeequipmentreference');
+$cssScript = '<style>.formRow{padding: 5px 16px;}#main8 .widget{margin-top: 15px;}</style>';
+$content = $this->controller . '/' . $this->action . '.phtml';
+//$breadLinks = '<ul><li><a title="" href="'.$this->baseUrl ().'/'.$this->translate('lang').'/'.$this->controller.'/typeequipementadd"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+require_once TMP_USER_PATH;
+?>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $("#research").hide();
+        $("#basic_search").show();
+	$('#advancedsearch').click(function(){
+    $("#basic_search").hide();
+	$("#research").slideToggle();
+	$("#research").show();
+	$("#basicsearch").click(function(){
+		 $("#research").hide();
+         $("#basic_search").show();
+		});
+	});
+});
+	//typeequipementindex
+</script>
+<div id="contentdata"> 
+    <div class="wrapper">
+        <div class="fluid">            
+            
+            <div class="formRow">
+				<!-- result content -->
+                <div class="widget grid3">
+                    <div class="whead">
+                        <h6><span class="icos-tags"> </span>&nbsp;<?php echo $this->translate('addtypeequipmentname')?></h6>
+                        <div class="clear"></div>
+                    </div>
+                      <form method="post"
+			action="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/typeequipementindex" id="usualValidate" name="frmTypeEquipement" onsubmit="return validateForm()" >                     
+                        <div class="formRow">
+                            <label><?php echo $this->translate('companyname')?><span class="req">*</span>:</label>
+                            <input type="text" placeholder="<?php echo $this->translate('typeequipmentname')?>" name="txttypename" id="txttypename" class="required" /> 
+                            <div class="clear"></div>                           
+                        </div>
+                        <div class="formRow">
+                        <label>Factory:<span class="req">*</span></label><div class="clear"></div>
+                        <select name="cboFactoryID" id="cboFactoryID" class="required">
+                        <option value="">---- <?php echo $this->translate('selectone')?> ----</option>
+                         <?php 
+								if(count($this->getFactory)!=0){
+								foreach ($this->getFactory as $FactoryName){
+						  ?> 
+                            <option value="<?php echo $FactoryName['Fou_Id'];?>"><?php echo $FactoryName['Fou_Name'];?></option>
+                            <?php }}?>
+                        </select>
+                        <label for="cboFactoryID" class="error cboFactoryIDLabel" style="display: none;"><?php echo $this->translate('requiredfile')?></label> 
+                        <div class="clear"></div>                                  
+                        </div>
+                  
+                        <div class="formRow">
+                            <label>Description:</label>
+                            <textarea rows="8" cols="" name="txttypedescription" id="txttypedescription" placeholder="<?php echo $this->translate('notehere')?>"></textarea>
+                        </div>
+                        
+                        <div class="divider"><span></span></div>
+                        <!-- Sidebar buttons -->
+                        <div class="fluid sideWidget body">
+                            <input type="submit" class="buttonS bBlue" value="<?php echo $this->translate('submit')?>" name="btnaddtype" />
+                        </div>  
+            
+            	<!-- Sidebar form -->  
+              <div class="clear"></div>
+                    </form>                 
+                </div>
+                
+                
+               
+				<div class="widget check grid9">
+					<div class="whead">
+						<span class="titleIcon"> <input type="checkbox" id="titleCheck"
+							name="titleCheck" />
+						</span>
+						<h6>Type Equipement <?php //echo $this->translate('viewsite')?></h6>
+						<div class="clear"></div>
+					</div>
+					<form method="post" action="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/typeequipementdelete">
+                    <div id="dyn2" class="shownpars">                        
+					<table cellpadding="0" cellspacing="0" width="100%"
+						class="tDefault checkAll tMedia" id="checkAll">
+						<thead>
+
+							<tr>
+								<td><img src="<?php echo $this->baseUrl();?>/images/elements/other/tableArrows.png" alt="" /></td>
+								<!--
+<td width="100"><?php //echo $this->translate('edit')?></td>
+-->
+								<td class="sortCol" width="150"><div>
+									N<sup>O</sup>	<?php //echo $this->translate('companyname')?><span></span>
+								</div></td>
+								<td class="sortCol" width="150"><div>
+										<?php echo $this->translate('companyname')?><span></span>
+									</div></td>
+								<td class="sortCol"><div>Factory<span></span>
+									</div></td>
+								<td class="sortCol"><div><?php echo $this->translate('reference')?>
+										<span></span>
+									</div></td>
+								<td class="sortCol"><div><?php echo $this->translate('createdate')?><span></span>
+									</div></td>
+								<td class="sortCol"><div><?php echo $this->translate('modifydate')?><span></span>
+									</div></td>									
+									<!--
+<td class="sortCol"><div>
+										<?php //echo $this->translate('siteacontroler')?><span></span>
+									</div></td>
+-->
+								<td width="100">Actions</td>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<td colspan="8">
+									<div class="itemActions">										
+										<select id="actionSelect" name="multiAction">
+											<option value="">---- <?php echo $this->translate('selectone')?> ----</option>
+											<option value="Delete"><?php echo $this->translate('delete')?></option>
+										</select>
+									</div>
+									<input onclick="return confirm('<?php echo $this->translate('areyousure') ?>')" style="margin-top: 6px; margin-left: 5px; height: 28px;" class="tablectrl_medium bDefault" type="submit"  value="<?php echo $this->translate('apply')?>" name="btnDeleteMulti" />
+
+	   				
+								</td>
+								
+							</tr>
+						
+						</tfoot>
+						
+						<tbody>
+                        <?php 
+								if(count($this->getTypeEquipement)!=0){
+								foreach ($this->getTypeEquipement as $getType){
+						?> 
+	   				    <tr >
+	   					<td><input type="checkbox" name="checkRow[]" value="<?php echo $getType['type_id'];?>" /></td>
+		                
+	   				    <td>000<?php echo $getType['type_id'];?></td>
+	   					<td><a href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/typeequipementview?actions=overview&&id=<?php  echo $getType['type_id']; ?>"><?php echo $getType['type_name'];?></a></td>
+	   					<td><?php echo $getType['Fou_Name'];?></td>
+	   					<td><?php echo $getType['type_ref'];?></td>
+	   					<td><?php echo $getType['type_createdate'];?></td>
+	   					<td><?php echo $getType['type_modifdate'];?></td>
+	   					<td class="tableActs noBorderB" align="center">
+                            <a href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php  echo $this->controller?>/typeequipementedit?actions=edit&&id=<?php echo $getType['type_id'];?> " class="tablectrl_small bBlue tipS" original-title="<?php echo $this->translate('edit')?>"><span class="iconb" data-icon="&#xe1db;"></span></a>
+                            <a href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/typeequipementdelete?actions=delete&&id=<?php echo $getType['type_id'];?>" class="tablectrl_small bRed tipS" original-title="<?php echo $this->translate('remove')?>" onclick="return confirm('<?php echo $this->translate('areyousure') ?>')"><span class="iconb" data-icon="&#xe136;"></span></a>
+                            
+                        </td>
+	   				</tr>
+	   				<?php 
+	   					}
+	   				}
+ 					?>
+					</tbody>
+					
+						</table>
+                        <div class="fg-toolbar tableFooter"><div class="dataTables_info" id="dynamic_info"><?php echo $this->translate('showingOf0To0')?></div><div class="dataTables_paginate paging_full_numbers" id="dynamic_paginate"><a class="first paginate_button paginate_button_disabled" tabindex="0" id="dynamic_first"><?php echo $this->translate('first')?></a><a class="previous paginate_button paginate_button_disabled" tabindex="0" id="dynamic_previous"><?php echo $this->translate('previous')?></a><span><a class="paginate_active" tabindex="0">1</a><a class="paginate_button" tabindex="0">2</a><a class="paginate_button" tabindex="0">3</a><a class="paginate_button" tabindex="0">4</a><a class="paginate_button" tabindex="0">5</a></span><a class="next paginate_button" tabindex="0" id="dynamic_next"><?php echo $this->translate('next')?></a><a class="last paginate_button" tabindex="0" id="dynamic_last"><?php echo $this->translate('last')?></a></div></div>						
+					</div>
+                    </form>
+				</div>				 
+                </div>
+				                
+				<!-- end result content -->
+
+			<!-- end search content -->
+	   </div>
+	<div class="clear"></div>
+	
+</div>
+</div>
+
+<script>
+function validateForm()
+{
+var r=document.forms["frmTypeEquipement"]["cboFactoryID"].value;
+if (r==null || r=="")
+  {
+  $('.comIdLabel').show();
+  return false;
+  }
+}
+</script>

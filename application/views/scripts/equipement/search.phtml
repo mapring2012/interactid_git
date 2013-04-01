@@ -1,0 +1,104 @@
+<table cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia" id="checkAll">
+                                <thead>
+                                    <tr>
+                                        <td width="130" class="sortCol"><div> Equipement name<span></span></div></td>
+                                        <td  width="30" class="sortCol"><div>SKU<span></span></div></td>
+                                        <td width="120" class="sortCol"> Frequence maintenance</td>
+                                        <td width="30"> Warranty</td>                                        
+                                        <td width="100"> Description</td>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5">
+                                            <div class="itemActions">
+                                                <label>Apply action:</label>
+                                                <select>
+                                                    <option value="">Select action...</option>
+                                                    <option value="Edit">Edit</option>
+                                                    <option value="Delete">Delete</option>
+                                                    <option value="Move">Move somewhere</option>
+                                                </select>
+                                            </div>
+                                            <div class="tPages">
+                                                <ul class="pages">
+                                                    <li class="prev"><a href="#" title=""><span class="icon-arrow-14"></span></a></li>
+                                                    <li><a href="#" title="" class="active">1</a></li>
+                                                    <li><a href="#" title="">2</a></li>
+                                                    <li><a href="#" title="">3</a></li>
+                                                    <li><a href="#" title="">4</a></li>
+                                                    <li><a href="#" title="">5</a></li>
+                                                    <li><a href="#" title="">6</a></li>
+                                                    <li>...</li>
+                                                    <li><a href="#" title="">20</a></li>
+                                                    <li class="next"><a href="#" title=""><span class="icon-arrow-17"></span></a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                <?php       
+                                if (count($this->searchname)!=0){
+                                foreach ($this->searchname as $rows){
+                                ?> 
+                                
+                                <script type="text/javascript">                                  
+                                  $("tr#getId<?php echo $rows['equip_id'];?>").click(function(){
+                                    $('#txtName').val( $('#equipName<?php echo $rows['equip_id'];?>').val() );
+                                    $('#txtSearch').val( $('#equipSearch<?php echo $rows['equip_id'];?>').val() );
+                                    $('#txtSKU').val( $('#equipSKU<?php echo $rows['equip_id'];?>').val() );
+                                    $('#txtFrequenceMaintenance').val( $('#equipfreqmaintance<?php echo $rows['equip_id'];?>').val() );                                    
+                                    $('#txtWarranty').val( $('#equipwarranty<?php echo $rows['equip_id'];?>').val() );
+                                    $('#txtWarrantyDate').val( $('#equipWarrantyd<?php echo $rows['equip_id'];?>').val() );
+                                    $('#txtDescription').val( $('#equipDescription<?php echo $rows['equip_id'];?>').val() );
+                                    $('#txtnote').val( $('#equipNote<?php echo $rows['equip_id'];?>').val() );
+                                                                       
+                                  });
+                                  $("tr#getId<?php echo $rows['equip_id'];?>").click(function(){
+                                        $('.ui-dialog').hide();
+                                    
+                                  });
+                                   $('.ui-dialog').show();
+                                </script>
+                               
+                                <style>
+                                tr#getId<?php echo $rows['equip_id'];?>:hover {background:#ddd;color:#0000ff;}
+                                </style>                       
+                                    <tr id="getId<?php echo $rows['equip_id'];?>" class="trhover">                                                                      
+                                        <td><?php echo $rows['equip_name'];?>
+                                            <input id="equipSearch<?php echo $rows['equip_id'];?>" type="hidden" value="<?php echo $rows['equip_name'];?>" />
+                                            <input id="equipName<?php echo $rows['equip_id'];?>" name="equipName" type="hidden" value="<?php echo $rows['equip_name'];?>" />
+                                            <input id="equipWarrantyd<?php echo $rows['equip_id'];?>" type="hidden" value="<?php echo $rows['equip_warrantydate'];?>" />
+                                            <input id="equipDescription<?php echo $rows['equip_id'];?>" type="hidden" value="<?php echo $rows['equip_description'];?>" />
+                                            <input id="equipNote<?php echo $rows['equip_id'];?>" type="hidden" value="<?php echo $rows['equip_notice'];?>" />
+                                        </td>
+                                        <td class="textL">
+                                            <?php echo $rows['equip_SKU'];?>
+                                            <input id="equipSKU<?php echo $rows['equip_id'];?>" name="equipSKU" type="hidden" value="<?php echo $rows['equip_SKU'];?>" />
+                                        </td>
+                                        <td>
+                                            <?php echo $rows['equip_freqmaintance'];?>
+                                            <input id="equipfreqmaintance<?php echo $rows['equip_id'];?>" name="equipfreqmaintance" type="hidden" value="<?php echo $rows['equip_freqmaintance'];?>" />
+                                        </td>
+                                        <td class="fileInfo">
+                                            <?php echo $rows['equip_warranty'];?>
+                                            <input id="equipwarranty<?php echo $rows['equip_id'];?>" name="equipwarranty" type="hidden" value="<?php echo $rows['equip_warranty'];?>" />
+                                        </td>
+                                        <td>
+                                            <?php echo $rows['equip_notice'];?>
+                                            <input id="equipnotice<?php echo $rows['equip_id'];?>" name="equipnotice" type="hidden" value="<?php echo $rows['equip_notice'];?>" />
+                                        </td>
+                                    </tr>                                                                
+                                  <?php }}else{
+	?>
+	<tr>
+        <td colspan="5">No record search</td>
+                                       
+      </tr>
+	<?php 
+}
+?>    
+                                </tbody>
+                            </table>                            
+                          

@@ -1,0 +1,155 @@
+<?php
+    $javascript ='';
+    $cssScript = '<style>.widget .body{background:#fff;padding:0;}.widget{border:1px solid #ddd;}
+    td:first-child { background:#eee}td:first-child + td { font-weight:bold;background:#fff;}background:#eee}td:first-child + td { font-weight:bold;background:#fff;}td:first-child + td + td { font-weight:bold;background:#eee;}td:first-child + td + td + td{ font-weight:bold;background:#fff;}#map_canvas {height: 250px;width: 100%;}</style>';
+    $pageTitle = 'Create - Organisme';
+    $breadLinks = '<ul><li><a title="" href="'.$this->url(array('Controller' => 'Typeequipement', 'action' => 'add')).'"><i class="icos-add"></i><span>Create</span><strong></strong></a></li></ul>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+    require_once TMP_USER_PATH;
+?>
+<div id="contentdata"> 
+    <div class="wrapper">
+        <div class="fluid">
+            <div class="widget grid12"> 
+                 <div class="whead">
+                 <a class="buttonH bRed right" href="<?php echo  $this->url(array('Controller'=>'typeequipement','action'=>'index'));?>"><?php echo $this->translate('back')?></a>
+                 <a title="" class="buttonH bBlue right" href="/Interactid/public/fr/site/edit?actions=edit&amp;&amp;id=53&amp;&amp;userids=30">Éditer</a>
+				
+						<h6>Type Equipement</h6>
+						<div class="clear"></div>
+					</div> 
+
+                        <table width="100%" cellspacing="0" cellpadding="0" class="tDefault">
+                        <?php  foreach ($this->SelelectOverView as $ValueOV):?>
+                         <?php  $selected='selected'; ?>
+                          <input type="hidden" name="hiddenID" value="<?php echo $ValueOV['Type_id'];?>" />
+                            <tbody>
+                                <tr>
+                                    <td width="200">N.Ref Type</td>
+                                    <td width="600">000<?php echo $ValueOV['Type_id'];?></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td width="200">Nom</td>
+                                    <td width="600"><?php echo $ValueOV['Type_name'];?></td>
+                                    
+                                </tr>
+                                <tr>
+                                   <td width="200">Decription</td>
+                                    <td width="600"><?php echo $ValueOV['Type_description'];?></td>
+                                </tr>
+                                <tr>
+                                   <td width="200">Controles Visueis</td>
+                                    <td width="600"><?php echo "ASPECT DE SURFACE";?></td>
+                                </tr>
+                                <tr>
+                                <td width="200">Maintenance</td>
+                                    <td width="600"><?php echo 'SURFACE';?></td>
+                                </tr>
+                                <tr>
+                                    <td width="200">Date</td>
+                                    <td width="600"><?php echo $ValueOV['Type_createdate'];?></td>
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>
+                        <?php endforeach;?>
+
+
+             <!-- end  formRow --> 	
+                <div class="clear"></div>		 
+            </div>                
+        </div>
+        
+        
+        <!-- data 2 -->
+        <div class="widget">
+        	<div class="whead"><h6>Controles Visuels</h6>
+	        	<a class="tipS" href="#" original-title="Create">
+	                <span class="headIcon" style="margin: 7px 10px 0 0"> Create</span><span class="headIcon icos-add" href="#" style="margin: 7px 5px 0 0"></span>
+	            </a>
+                <div class="clear"></div>
+            </div>
+            <div class="body">           
+            <table cellspacing="0" cellpadding="0" width="100%" class="tDefault">
+                <thead>
+                    <tr>
+                        <td>N<sup>0</sup></td>
+                        <td>Description</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="noBorderB"><center>001</center></td>
+                        <td class="noBorderB"><center>ASPECT DE SURFACE</center></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            
+            <!-- page nav -->
+            <div class="fg-toolbar tableFooter">
+            	<div class="dataTables_info" id="dynamic_info">Showing 1 to 10 of 57 entries</div>
+	            <div class="dataTables_paginate paging_full_numbers" id="dynamic_paginate">
+		            <a class="first paginate_button paginate_button_disabled" tabindex="0" id="dynamic_first">First</a>
+		            <a class="previous paginate_button paginate_button_disabled" tabindex="0" id="dynamic_previous">Previous</a>
+	            	<span>
+	            		<a class="paginate_active" tabindex="0">1</a>
+	            		<a class="paginate_button" tabindex="0">2</a>
+	            	</span>
+		            <a class="next paginate_button" tabindex="0" id="dynamic_next">Next</a>
+		            <a class="last paginate_button" tabindex="0" id="dynamic_last">Last</a>
+	            </div>
+	        </div>
+            <!-- end page nav -->
+            </div>
+        </div>
+        <!-- end data 2 -->
+
+        <!-- data 3 -->
+        <div class="widget">
+        	<div class="whead"><h6>Maintenance</h6>
+	        	<a class="tipS" href="#" original-title="Create">
+	                <span class="headIcon" style="margin: 7px 10px 0 0"> Create</span><span class="headIcon icos-add" href="#" style="margin: 7px 5px 0 0"></span>
+	            </a>
+                <div class="clear"></div>
+            </div>
+            <div class="body">           
+            <table cellspacing="0" cellpadding="0" width="100%" class="tDefault">
+                <thead>
+                    <tr>
+                         <td>N<sup>0</sup></td>
+                        <td>Description</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="noBorderB"><center>001</center></td>
+                        <td class="noBorderB"><center>NETTOYAGE DES SURFACES</center></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            
+            <!-- page nav -->
+            <div class="fg-toolbar tableFooter">
+            	<div class="dataTables_info" id="dynamic_info">Showing 1 to 10 of 57 entries</div>
+	            <div class="dataTables_paginate paging_full_numbers" id="dynamic_paginate">
+		            <a class="first paginate_button paginate_button_disabled" tabindex="0" id="dynamic_first">First</a>
+		            <a class="previous paginate_button paginate_button_disabled" tabindex="0" id="dynamic_previous">Previous</a>
+	            	<span>
+	            		<a class="paginate_active" tabindex="0">1</a>
+	            		<a class="paginate_button" tabindex="0">2</a>
+	            	</span>
+		            <a class="next paginate_button" tabindex="0" id="dynamic_next">Next</a>
+		            <a class="last paginate_button" tabindex="0" id="dynamic_last">Last</a>
+	            </div>
+	        </div>
+            <!-- end page nav -->
+            </div>
+        </div>
+        <!-- end data 3 -->        
+    </div>
+</div>
+   

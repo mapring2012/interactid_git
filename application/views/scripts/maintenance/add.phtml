@@ -1,0 +1,302 @@
+<?php
+    $javascript ='';
+    $cssScript = '';
+    $pageTitle = $this->translate('edit');
+    $cssScript = '<style>.formRow{padding: 5px 16px;}#main8 .widget{margin-top: 15px;}
+    .marinright{margin-right:50px;}
+    #addfield, .removerow, .cusors {cursor:pointer;cursor:hand}
+    .notsubmit {background:#999;border:1px soid #ddd;box-shadow:none; cursor:default!important;}
+    label.error{margin:0 0 5px!important}
+    </style>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+    require_once TMP_USER_PATH;
+?>
+<script type="text/javascript">
+$(document).ready(function()
+{
+$(".country").change(function()
+{
+var id=$(this).val();
+var dataString = 'id='+ id;
+
+$.ajax
+({
+type: "POST",
+url: "http://localhost/Interactid/public/en/maintenance/maintenance",
+data: dataString,
+cache: false,
+success: function(html)
+{
+$(".category").html(html);
+} 
+});
+$.ajax
+({
+type: "POST",
+url: "http://localhost/Interactid/public/en/maintenance/services",
+data: dataString,
+cache: false,
+success: function(html)
+{
+$(".category").html(html);
+} 
+});
+});
+});
+</script>
+<style>
+label
+{
+font-weight:bold;
+padding:10px;
+}
+</style>
+<div id="contentdata">
+<form name="registerForm" id="registerForm"   enctype="multipart/form-data" id="usualValidate" class="main" method="post" action="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/add">
+    <div class="wrapper">	
+	   <div class="fluid">
+                <div class="widget grid12">       
+                    <ul class="tabs">
+                        <li class="tabl1"><a href="#tabb1"><?php echo $this->translate('categorymanagent')?></a></li>
+                    </ul>
+                    
+                    <div class="tab_container">
+                    <div id="tabb1" class="tab_content">                    
+                   <div class="widget justTable grid4">
+                        <div class="body" align="center">
+                            <div class="grid3"><label>Country</label></div>
+                                 <div class="grid6" style="padding-bottom: 20px;">
+                                    <select name="country" class="country">
+                                        <option selected="selected">--Select Country--</option>
+                                        <option>sdfsdfsdf</option>
+                                        <option>sfsdf</option>
+                                        <option>sdfsdf</option>
+                                        <option>werfwerwe</option>
+                                    </select>
+                            </div>
+                         </div>
+                           
+                        
+                    </div>
+                    
+                    <!-- Maintenance -->
+                    <div class="widget justTable grid4">
+                        <div class="body" align="center">
+                             <div class="grid3"><label>Category</label></div>
+                                 <div class="grid6" style="padding-bottom: 20px;">
+                                    <select name="country" class="category">
+                                        <option selected="selected">--Select city--</option>
+                                    </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Service -->
+                     <div class="widget justTable grid4">
+                        <div class="body" align="center">
+                    
+                       <h6 align="left">Service of Maintenance: </h6><br/>
+                            <div class="grid3"><label></label></div>
+                            <div class="grid6 check" style="padding-bottom: 20px;">
+                                <input type="checkbox" name="chbox1" id="check2" style="opacity: 0;"/>
+                                <label style="float: none;  height: 0;">checked1</label><br />
+                                <input type="checkbox" name="chbox2" id="check2" style="opacity: 0;"/>
+                                <label style="float: none;  height: 0;">checked2</label><br />
+                                <input type="checkbox" name="chbox3" id="check2" style="opacity: 0;"/>
+                                <label style="float: none;  height: 0;">checked3</label><br />
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                    </div>
+                    <!-- Photo Gallary -->
+                    <!-- end Photo Gallary -->
+                </div>           
+                        </div>     
+                    </div>	
+                    <div class="clear"></div>		 
+                </div>
+                <div class="clear"></div>
+                <div class="formRow">
+                    <div class="body">
+                    <br/>
+                         <a class="buttonS bGreyish" href="<?php echo  $this->url(array('Controller'=>'organisme','action'=>'index'));?>"><?php echo $this->translate('cancel')?></a>&nbsp;&nbsp;&nbsp;
+                        
+                        
+                    </div>
+                </div>				
+            </div>
+        </div>
+        </form>
+    </div>
+	
+<script>
+$(document).ready(function(){
+
+  $("#addfield").click(function(){
+    $("#morefield").append('<ul><li><div id="idremove" class="formRow fluid"><div class="grid11"><div class="grid3"><input type="text" value="" name="txtOrderby[]"  id="txtOrderby" class=""/></div><div class="grid3"><input type="text" value="" name="txtCode[]"  id="txtCode" class=""/></div><div class="grid3"><input type="text" value="" name="txtLabel[]"  id="txtLabel" class=""/></div><div class="grid3"><textarea placeholder="Your message"  name="txtDescription[]"  id="txtDescription" cols="" rows="1"></textarea></div><div class="clear"></div></div><div class="grid1"><div class="removerow tablectrl_small bDefault"><span class="iconb" data-icon="&#xe14c;"></span></div></div></div></li></ul>');
+  });
+ 
+$("ul li .removerow").live("click", function() {  
+         $(this).parent().parent().remove();
+  });
+    $("#next2").click(function()
+    {
+            var txtName=$("#txtCatMaintenanceName").val();
+            if (txtName==null || txtName=="")
+            {
+                $('.txtCatMaintenanceNameLabel').show();
+                return false;
+            } 
+        $(".tabl1").removeClass("activeTab");
+        $(".tabl2").addClass("activeTab");
+        $("#back1").show();
+        $("#next3").show();
+        $("#next2").hide();
+        $("#tabb1").hide();
+        $("#tabb2").show();
+        $("#tabb3").hide();
+        $("#submitform").hide();
+    });
+    $("#next3").click(function()
+    {
+        var txtmaintenance=$("#txtmaintenance").val();
+            if (txtmaintenance==null || txtmaintenance==""){
+                $('.txtmaintenanceLabel').show();
+               
+                return false;
+                
+            } else{
+        $(".tabl2").removeClass("activeTab");
+        $(".tabl3").addClass("activeTab");
+        $("#back2").show();
+        $("#back1").hide();
+        $("#next3").hide();
+        $("#next2").hide();
+        $("#tabb1").hide();
+        $("#tabb2").hide();
+        $("#tabb3").show();
+        $("#submitform").show();
+        
+        }
+    });
+    
+    $(".tabl1").click(function()
+    {
+        $(".tabl2").removeClass("activeTab");
+        $(".tabl1").addClass("activeTab");
+        $("#back1").hide();
+        $("#next3").hide();
+        $("#next2").show();
+        $("#submitform").hide();
+    });
+    $(".tabl2").click(function()
+    {
+        var txtmaintenanc=$("#txtmaintenance").val();
+        var txtCatmaintenanc=$("#txtCatMaintenanceName").val();     
+        if (txtCatmaintenanc==null || txtCatmaintenanc==""){
+             $('.txtCatMaintenanceNameLabel').show();
+                alert('Category Name is required!');
+                $(".tabl3").removeClass("activeTab");
+                $(".tabl2").addClass("activeTab");
+        }else if (txtmaintenanc==null || txtmaintenanc==""){
+                $('.txtmaintenanceLabel').show();
+                return false;
+        }else{
+        $(".tabl1").removeClass("activeTab");
+        $(".tabl2").addClass("activeTab");
+        $("#back1").show();
+        $("#back2").hide();
+        $("#next3").show();
+        $("#next2").hide();
+        $("#submitform").hide();
+        }
+    });
+    $(".tabl3").click(function()
+    {
+        var txtCatmaintenanc=$("#txtCatMaintenanceName").val();
+        var txtMName=$("#txtmaintenance").val();
+        if (txtCatmaintenanc==null || txtCatmaintenanc==""){
+                $('.txtmaintenanceLabel').show();
+                alert('Category Name is required!');
+                $(".tabl3").removeClass("activeTab");
+                $(".tabl2").addClass("activeTab");
+                //$("#submitform").attr('disabled','disabled');
+                $("#submitform").addClass("notsubmit");
+        }else if (txtMName==null || txtMName==""){
+                $('.txtmaintenanceLabel').show();
+                alert('Maintenance Name is required!');
+                $(".tabl3").removeClass("activeTab");
+                $(".tabl1").addClass("activeTab");
+                $("#submitform").show();
+                //$("#submitform").attr('disabled','disabled');
+                $("#submitform").addClass("notsubmit");
+        }
+        $(".tabl2").removeClass("activeTab");
+        $(".tabl3").addClass("activeTab");
+        $("#back2").show();
+        $("#back1").hide();
+        $("#next3").hide();
+        $("#next2").hide();
+        //$("#submitform").attr('disabled','enabled');
+        $("#submitform").show();
+        
+    });
+    
+    
+
+  $("#back1").click(function()
+    {
+        $(".tabl2").removeClass("activeTab");
+        $(".tabl1").addClass("activeTab");
+        $("#back1").hide();
+        $("#next3").hide();
+        $("#next2").show();
+        $("#tabb1").show();
+        $("#tabb2").hide();
+        $("#tabb3").hide();
+        $("#submitform").hide();
+    }); 
+    
+    $("#back2").click(function()
+    {
+        $(".tabl3").removeClass("activeTab");
+        $(".tabl2").addClass("activeTab");
+        $("#back1").show();
+        $("#next3").show();
+        $("#next2").hide();
+        $("#back2").hide();
+        $("#tabb1").hide();
+        $("#tabb2").show();
+        $("#tabb3").hide();
+        $("#submitform").hide();
+    });
+    $("#submitform").click(function()
+    {
+        var txtCatmaintenanc=$("#txtCatMaintenanceName").val();
+        var txtMName=$("#txtmaintenance").val();
+        if (txtCatmaintenanc==null || txtCatmaintenanc=="")
+        {
+            $(".tabl3").removeClass("activeTab");
+            $(".tabl1").addClass("activeTab");
+            $("#submitform").hide();
+            $("#tabb1").show();
+            $("#tabb2").hide();
+            $("#tabb3").hide();
+            $('.txtCatMaintenanceNameLabel').show();
+            return false;
+        }
+        else if (txtMName==null || txtMName=="")
+        {
+            $(".tabl3").removeClass("activeTab");
+            $(".tabl2").addClass("activeTab");
+            $("#submitform").hide();
+            $("#tabb2").show();
+            $("#tabb1").hide();
+            $("#tabb3").hide();
+            $('.txtmaintenanceLabel').show();
+            return false;
+        }
+    });
+});
+ 
+</script> 

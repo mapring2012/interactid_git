@@ -1,0 +1,114 @@
+<?php
+    $javascript ='';
+    $cssScript = '<style>.widget .body{background:#fff;padding:0;}.widget{border:1px solid #ddd;}
+    td:first-child { background:#eee}td:first-child + td { font-weight:bold;background:#fff;}background:#eee}td:first-child + td { font-weight:bold;background:#fff;}td:first-child + td + td { font-weight:bold;background:#eee;}td:first-child + td + td + td{ font-weight:bold;background:#fff;}#map_canvas {height: 250px;width: 100%;}
+    FIELDSET {
+	border: 1px solid #ccc;
+	padding: 1em;
+	margin: 0;font-size: 16px;}
+    FIELDSET legend {font-weight:bold;}
+    .titlebody {padding:10px 0 0 10px;font-size:16px;}
+    </style>';
+    $pageTitle = $this->translate('overview');
+    $breadLinks = '<ul><li><a title="" href="'.$this->baseUrl ().'/'.$this->translate('lang').'/'.$this->controller.'/add"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+    require_once TMP_USER_PATH;
+?>
+<div id="contentdata">  
+    <div class="wrapper">
+       <div class="fluid">
+                <?php  foreach ($this->getMaintenaceOverview as $ValueOV):?>
+                    <div class="widget grid12">
+                        <div class="whead">
+                            <a class="buttonH bRed right" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/index"><?php echo $this->translate('back')?></a>
+    				        <a title="" class="buttonH bBlue right" href="<?php echo $this->baseUrl ();?>/<?php echo $this->translate('lang')?>/<?php echo $this->controller?>/edit?actions=edit&id=<?php echo $ValueOV['main_id'];?>"><?php echo $this->translate('edit')?></a>
+                            <h6>Maintenance<?php //echo $this->translate('addtypeequipmentname')?></h6>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="tab_container">
+                            <div id="tabb1" class="tab_content">                    
+                        <div class="justTable grid4">
+                            <div class="body">    						
+                            <h3 class="titlebody">Categories</h3>
+                            <table width="100%" cellspacing="0" cellpadding="0" class="tDefault widget">
+                                <tbody>
+                                    <tr>
+                                        <td width="200">Name<?php //echo $this->translate('companyaddress2')?></td>
+                                        <td width="600">000<?php echo $ValueOV['main_id'];?></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="200"><?php echo $this->translate('description')?></td>
+                                        <td width="600"><?php echo $ValueOV['catmain_name'];?></td>
+                                    </tr>
+    								 <tr>
+                                        <td width="200"><?php echo $this->translate('description')?></td>
+                                        <td width="600"><?php echo $ValueOV['catmain_description'];?></td>
+                                    </tr>
+                                </tbody>
+                            </table>					             
+                            </div>
+                        </div> 
+                        <!-- end grid4 -->
+                        <div class="justTable grid4">
+                            <div class="body">
+                                <h3 class="titlebody">Maintenance</h3>
+                                <table width="100%" cellspacing="0" cellpadding="0" class="tDefault widget">
+                                    <tbody>
+                                        <tr>
+                                            <td width="200">Name<?php //echo $this->translate('companyaddress2')?></td>
+                                            <td width="600"><?php echo $ValueOV['main_name'];?></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="200"><?php echo $this->translate('description')?></td>
+                                            <td width="600"><?php echo $ValueOV['main_description'];?></td>
+                                        </tr>
+        								 <tr>
+                                            <td width="200">Maintenance type usage<?php ///echo $this->translate('description')?></td>
+                                            <td width="600"><?php echo $ValueOV['main_type_usage'];?></td>
+                                        </tr>
+        								 <tr>
+                                            <td width="200">Maintenance type<?php ///echo $this->translate('description')?></td>
+                                            <td width="600"><?php echo $ValueOV['main_type'];?></td>
+                                        </tr>
+        								 <tr>
+                                            <td width="200">Maintenance Date<?php ///echo $this->translate('description')?></td>
+                                            <td width="600"><?php echo $ValueOV['main_createdate'];?></td>
+                                        </tr>
+        								<tr>
+                                            <td width="200">Maintenance Modify<?php ///echo $this->translate('description')?></td>
+                                            <td width="600"><?php echo $ValueOV['main_modifdate'];?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>     
+        						 <?php endforeach;?>
+                            </div>
+                        </div>
+                        <!-- end grid4 -->
+                        <div class="justTable grid4">
+                            <div class="body">
+                                <h3 class="titlebody">Service maintenance</h3>
+                                <table width="100%" cellspacing="0" cellpadding="0" class="tDefault widget">
+        						 <tbody>
+                                    <tr>
+                                            <td width="200">Order<?php //echo $this->translate('companyaddress2')?></td>
+                                            <td width="600">Name</td>
+                                    </tr>
+                                    <?php  foreach ($this->MaintenanceService as $ValueOV):?>
+        							     <tr>
+                                            <td width="200"><?php echo $ValueOV['refmain_order'];?></td>
+                                            <td width="600"><?php echo $ValueOV['refmain_label'];?></td>
+                                        </tr>
+                                    	<?php endforeach;?>
+                                        </tbody>  
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end grid4 -->
+                    </div>
+                    <div class="clear"></div>		 
+                    </div>
+                </div>
+        </div> 
+    </div>
+</div>
+   

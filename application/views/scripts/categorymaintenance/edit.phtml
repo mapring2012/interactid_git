@@ -1,0 +1,83 @@
+<?php
+    $javascript ='';
+    $cssScript = '';
+    $pageTitle = $this->translate('create');
+    $cssScript = '<style>.formRow{padding: 5px 16px;}#main8 .widget{margin-top: 15px;}
+    .searchCreate .fluid{margin-bottom:10px;}
+    .searchLine {margin:0;}
+    </style>';
+    $breadLinks = '<ul><li><a title="" href="'.$this->baseUrl ().'/'.$this->translate('lang').'/'.$this->controller.'/add"><i class="icos-add"></i><span>'.$this->translate('create').'</span><strong></strong></a></li></ul>';
+	$content = $this->controller.'/'.$this->action.'.phtml';
+    require_once TMP_USER_PATH;
+?>
+<div id="contentdata"> 
+<div class="wrapper">
+<div class="fluid">  
+ <form id="validate" class="main" method="post" action="<?php echo $this->url(array('action'=>'edit'));?>">          
+                <fieldset>
+                    <div class="widget grid12">
+                        <div class="whead"><h6>Edit Category Maintenance Name<?php //echo $this->translate('addtypeequipmentname')?></h6><div class="clear"></div></div>
+                        <?php  
+                        		if(count($this->viewCateMaintenanceEdit)!=0){
+            						foreach ($this->viewCateMaintenanceEdit as $getCateMaintenace){
+										 //$selected ="selected";
+                           ?>             
+                        
+                        <div class="formRow">
+                            <!-- form create -->
+                            
+                                <div class="widget grid6">
+                                    
+                                    <div class="body">
+                               			<div class="formRow fluid">
+            							<div class="grid4">
+            								<label>CategoryName<?php //echo $this->translate('companyname')?>:<span class="req">*</span></label>
+            							</div>
+            							<div class="grid8">
+            								<input type="hidden" value="<?php  echo $getCateMaintenace['catmain_id']; ?>" name="hddid"  id="hddid" class="required"/>
+            								<input type="text" value="<?php echo $getCateMaintenace['catmain_name']; ?>" name="txtCatMaintenanceName"  id="txtCatMaintenanceName" class="required"/>
+            							</div>							
+            							<div class="clear"></div>
+            						</div>
+            						
+            						<div class="formRow fluid">
+            							<div class="grid4">
+            								<label>Description<?php //echo $this->translate('RaisonSocial')?>:<span class="req"></span></label>
+            							</div>
+            							<div class="grid8">
+            								<input type="text" value="<?php echo $getCateMaintenace['catmain_description']; ?>" name="txtDescription" id="txtDescription" />
+            							</div>
+            						<div class="clear"></div>
+            						</div>
+                                     
+                                  </div>
+                           </div>
+                           <!--The end grid 6-->
+                          
+                                <div class="clear"></div>
+                        </div>
+                          <?php 
+                          	 }
+							}
+                          ?>
+                        
+                        
+                        
+                          
+                        
+                        <div class="formRow">
+						<a class="buttonS bGreyish" href="<?php echo  $this->url(array('Controller'=>'equipement','action'=>'index'));?>"><?php echo $this->translate('cancel')?></a>
+                        <input class="buttonS bRed" type="reset" name="btn_reset" value="<?php echo $this->translate('reset')?>" />
+                        <input class="buttonS bBlue" type="submit" name="BtnUpdateCategoryMaintenance" value="<?php echo $this->translate('submit')?>" />
+                        <div class="clear"></div>
+                    </div>
+                    
+                    
+                </fieldset>
+            </form>
+        </div>
+		
+	</div>
+</div>                     
+
+                
